@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyperlinks Demonstration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            margin: 40px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        /* Image hyperlink styling */
+        .image-link {
+            display: inline-block;
+            border: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .image-link:hover {
+            border-color: #0066cc;
+        }
+
+        /* List hyperlink styling */
+        .link-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .link-list li {
+            margin: 10px 0;
+            background: #f5f5f5;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+
+        .link-list a {
+            display: block;
+            padding: 12px 20px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .link-list a:hover {
+            background: #e0e0e0;
+            color: #0066cc;
+        }
+    </style>
+</head>
+<body>
+    <!-- Image Hyperlink Section -->
+    <div class="section">
+        <h2>Image Hyperlink Example</h2>
+        <p>Click the image below to visit example.com:</p>
+        <a href="https://www.example.com" class="image-link" target="_blank">
+            <img src="https://via.placeholder.com/400x200" 
+                 alt="Example placeholder image"
+                 width="400"
+                 height="200">
+        </a>
+    </div>
+
+    <!-- List Item Hyperlink Section -->
+    <div class="section">
+        <h2>List Item Hyperlink Example</h2>
+        <ul class="link-list">
+            <li>
+                <a href="https://www.example.com/page1" target="_blank">
+                    First List Item - Page 1
+                </a>
+            </li>
+            <li>
+                <a href="https://www.example.com/page2" target="_blank">
+                    Second List Item - Page 2
+                </a>
+            </li>
+            <li>
+                <a href="https://www.example.com/page3" target="_blank">
+                    Third List Item - Page 3
+                </a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

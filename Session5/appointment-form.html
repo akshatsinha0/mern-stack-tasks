@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Appointment Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            min-height: 600px;
+        }
+
+        .left-section {
+            flex: 1;
+            background: linear-gradient(135deg, #e8f4f8 0%, #d1e7dd 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .doctor-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .right-section {
+            flex: 1.2;
+            padding: 40px;
+            background-color: white;
+        }
+
+        .form-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 3px solid #dc3545;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="time"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        input[type="time"]:focus,
+        input[type="tel"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+        }
+
+        .gender-group {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .radio-group {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .appointment-types {
+            margin-top: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            gap: 8px;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 8px;
+        }
+
+        .submit-btn {
+            background-color: #6c757d;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background-color: #5a6268;
+        }
+
+        .appointment-type-label {
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 15px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Section with Doctor Image -->
+        <div class="left-section">
+            <img src="doctor-img.png" alt="Female Doctor" class="doctor-image">
+        </div>
+
+        <!-- Right Section with Form -->
+        <div class="right-section">
+            <h1 class="form-title">Doctor Appointment Form</h1>
+            
+            <form id="appointmentForm" action="#" method="post">
+                <!-- Appointment Date -->
+                <div class="form-group">
+                    <label for="appointmentDate">Appointment Date</label>
+                    <input type="date" id="appointmentDate" name="appointmentDate" required>
+                </div>
+
+                <!-- Appointment Time -->
+                <div class="form-group">
+                    <label for="appointmentTime">Appointment Time</label>
+                    <input type="time" id="appointmentTime" name="appointmentTime" required>
+                </div>
+
+                <!-- Name (First and Last) -->
+                <div class="form-group">
+                    <label>Name</label>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" id="firstName" name="firstName" placeholder="First" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="lastName" name="lastName" placeholder="Last" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gender -->
+                <div class="form-group">
+                    <label>Gender</label>
+                    <div class="gender-group">
+                        <div class="radio-group">
+                            <input type="radio" id="male" name="gender" value="male" required>
+                            <label for="male">Male</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" id="female" name="gender" value="female" required>
+                            <label for="female">Female</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phone -->
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" name="phone" placeholder="###" required>
+                </div>
+
+                <!-- Address (City and State) -->
+                <div class="form-group">
+                    <label>Address</label>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" id="city" name="city" placeholder="City" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="state" name="state" placeholder="State" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Your Query -->
+                <div class="form-group">
+                    <label for="query">Your Query</label>
+                    <textarea id="query" name="query" placeholder="Describe your concerns..."></textarea>
+                </div>
+
+                <!-- Appointment Type -->
+                <div class="form-group">
+                    <label class="appointment-type-label">Appointment Type</label>
+                    <p style="margin-bottom: 15px; color: #666; font-size: 14px;">Select which appointment type(s) you require</p>
+                    <div class="appointment-types">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="cervixCheckup" name="appointmentType[]" value="cervix">
+                            <label for="cervixCheckup">Cervix checkup</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="heartCheckup" name="appointmentType[]" value="heart">
+                            <label for="heartCheckup">Heart checkup</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="eyeCheckup" name="appointmentType[]" value="eye">
+                            <label for="eyeCheckup">Eye check up</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="hearingTest" name="appointmentType[]" value="hearing">
+                            <label for="hearingTest">Hearing Test</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Appointment request submitted successfully!');
+        });
+    </script>
+</body>
+</html>
+

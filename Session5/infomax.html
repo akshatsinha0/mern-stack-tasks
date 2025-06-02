@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infomax Computer Academy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Times New Roman", Times, serif;
+            background-color: #FFD700;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .main-title {
+            font-size: 42px;
+            font-weight: bold;
+            color: #8B0000;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        .navigation {
+            border-top: 3px solid #8B0000;
+            border-bottom: 3px solid #8B0000;
+            padding: 8px 0;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .nav-links {
+            font-size: 14px;
+            font-weight: bold;
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        .nav-links a {
+            color: #0000EE;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+
+        .nav-links a:hover {
+            color: #8B0000;
+        }
+
+        .main-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .content-text {
+            flex: 2;
+            padding-right: 20px;
+        }
+
+        .content-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .student-image {
+            max-width: 100%;
+            height: auto;
+            max-height: 400px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            margin-top: 25px;
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        .section-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: justify;
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        .ticker-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background-color: #FFD700;
+            overflow: hidden;
+            border-top: 2px solid #8B0000;
+            display: flex;
+            align-items: center;
+        }
+
+        .ticker-content {
+            display: inline-block;
+            white-space: nowrap;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            font-family: "Times New Roman", Times, serif;
+            animation: ticker-scroll 15s linear infinite;
+            transform: translateX(-100%);
+        }
+
+        .ticker-content a {
+            color: #0000EE;
+            text-decoration: underline;
+        }
+
+        .ticker-content a:hover {
+            color: #8B0000;
+        }
+
+        @keyframes ticker-scroll {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .main-title {
+                font-size: 32px;
+            }
+            
+            .ticker-content {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="main-title">INFOMAX<br>COMPUTER ACADEMY</h1>
+        </div>
+
+        <div class="navigation">
+            <div class="nav-links">
+                <a href="#home">HOME</a> | 
+                <a href="#about">ABOUT US</a> | 
+                <a href="#courses">COURSES</a> | 
+                <a href="#nielit">NIELIT</a> |
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="content-text">
+                <h2 class="section-title">Who We Are?</h2>
+                <p class="section-text">
+                    Infomax is Computer Academy which provides high quality computer education at a very high standard at a low cost.
+                </p>
+                <p class="section-text">
+                    ICA's mission is to create a pool of high quality software professionals who will meet the demanding needs of multinational organizations for tomorrow's challenges.
+                </p>
+
+                <h2 class="section-title">What We Offer?</h2>
+                <p class="section-text">
+                    We are committed to provide technology-based education to all sections of the society, for the overall development of the country through continual improvements of quality management system to achieve our objectives of promoting younger generation towards prosperity.
+                </p>
+            </div>
+
+            <div class="content-image">
+                <img src="girlgoingtoschoolimg.png" alt="Student with books and backpack" class="student-image">
+            </div>
+        </div>
+    </div>
+
+    <div class="ticker-container">
+        <div class="ticker-content">
+            Dear Student O Level Registration Start now for Registration <a href="#registration">Click Here</a>
+        </div>
+    </div>
+</body>
+</html>

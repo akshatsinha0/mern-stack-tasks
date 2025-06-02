@@ -1,0 +1,5 @@
+Q1) Explain the use of Hyperlinks in html?
+Ans) These links help to jump to another document. When we move the mouse over a link, the mouse arrow turns into a little hand. A link does not have to be text. A link can be image or any image or any other html element.
+
+Q2) Write the program to show how hyperlink can be added to images and list items.
+Ans) See the html file
