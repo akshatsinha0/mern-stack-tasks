@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* Vertical Nav */
+    .vertical-nav {
+      width: 150px;
+      background-color: lightblue;
+      border: 2px solid orange;
+      padding: 0;
+    }
+
+    .vertical-nav a {
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      color: black;
+    }
+
+    .vertical-nav a:first-child {
+      background-color: orange;
+      font-weight: bold;
+    }
+
+    /* Horizontal Nav */
+    .horizontal-nav {
+      margin-top: 30px;
+      display: flex;
+      border: 1px solid gray;
+    }
+
+    .horizontal-nav a {
+      padding: 10px 15px;
+      text-decoration: none;
+      border-right: 1px solid gray;
+    }
+
+    .horizontal-nav a:first-child {
+      background-color: gray;
+      color: white;
+    }
+
+    .horizontal-nav a:not(:first-child) {
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+
+  <h4>Vertical Navigation Bar</h4>
+  <div class="vertical-nav">
+    <a href="#">Home</a>
+    <a href="#">Java</a>
+    <a href="#">CSS</a>
+    <a href="#">HTML</a>
+    <a href="#">Bootstrap</a>
+  </div>
+
+  <h4>Horizontal Navigation Bar</h4>
+  <div class="horizontal-nav">
+    <a href="#">Home</a>
+    <a href="#">Java</a>
+    <a href="#">HTML</a>
+    <a href="#">CSS</a>
+  </div>
+
+</body>
+</html>
