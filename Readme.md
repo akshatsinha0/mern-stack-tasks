@@ -5,21 +5,9 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6-F7DF1E?logo=javascript&logoColor=black)
 ![MERN](https://img.shields.io/badge/Stack-MERN-61DAFB?logo=react&logoColor=white)
 
-Welcome to my hands-on journey through MERN stack development! This repository documents my progress in solving practical coding tasks from recorded session videos. 
+Welcome to my question-solving through MERN stack development! This repository documents my progress in solving practical coding tasks from MERN FULL STACK INTERNSHIP SESSIONS by the teacher. 
 
 ---
-
-## 📋 Table of Contents
-- [What You'll Find Here](#-what-youll-find-here)
-- [Repository Structure](#-repository-structure)
-- [Getting Started](#-getting-started)
-- [Code Examples](#-code-examples)
-- [Development Approach](#-development-approach)
-- [Contribution](#-contribution)
-- [License](#-license)
-
----
-
 ## 🧰 What You'll Find Here
 
 ### **Session-Based Learning**
