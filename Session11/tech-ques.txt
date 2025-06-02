@@ -1,0 +1,111 @@
+1. Explain about procedural programming
+Procedural programming is a programming paradigm that organizes code into procedures (functions) that can be called to perform specific tasks. It follows a step-by-step approach where the program executes instructions sequentially. Key characteristics include:
+
+Function-based structure: Code is organized into reusable functions
+
+Top-down approach: Problems are broken down into smaller sub-problems
+
+Sequential execution: Instructions are executed one after another
+
+Examples: C, Pascal, FORTRAN, COBOL
+
+Benefits: Easy to understand, debug, and maintain for simple applications
+
+2. Explain the places where you have to put the JavaScript code
+JavaScript code can be placed in three main locations in HTML documents:
+
+Inside <head> section:
+
+xml
+<head>
+<script>
+function myFunction() {
+    // JavaScript code here
+}
+</script>
+</head>
+Inside <body> section:
+
+xml
+<body>
+<script>
+// JavaScript code here
+</script>
+</body>
+External JavaScript files:
+
+xml
+<script src="script.js"></script>
+Best practices:
+
+Place scripts at the bottom of <body> for better page loading performance
+
+Use external files for larger scripts to improve code organization
+
+Scripts in <head> load before page content
+
+3. Write about the list of JavaScript Editors
+Popular JavaScript editors and IDEs include:
+
+Code Editors:
+
+Visual Studio Code - Free, feature-rich with extensions
+
+Sublime Text - Fast, lightweight with plugin support
+
+Atom - Open-source, customizable (discontinued but still used)
+
+Brackets - Adobe's open-source editor
+
+Online Editors:
+
+CodePen - For front-end development and testing
+
+JSFiddle - Quick JavaScript testing environment
+
+Ace Editor - Embeddable code editor for web
+
+CodeMirror - In-browser code editor component
+
+IDEs:
+
+WebStorm - JetBrains' professional JavaScript IDE
+
+Eclipse - With JavaScript plugins
+
+NetBeans - Supports JavaScript development
+
+4. What are the JavaScript versions?
+JavaScript versions follow the ECMAScript (ES) standard:
+
+Major Versions:
+
+ES1 (1997) - First edition
+
+ES2 (1998) - Editorial changes
+
+ES3 (1999) - Added regular expressions, try/catch, switch statements
+
+ES5 (2009) - Added strict mode, JSON support, Array methods
+
+ES6/ES2015 - Major update with classes, modules, arrow functions, let/const
+
+ES2016 - Added exponentiation operator (**)
+
+ES2017 - Added async/await, Object.entries()
+
+ES2018 - Added rest/spread properties, async iteration
+
+ES2019 - Added Array.flat(), Object.fromEntries()
+
+ES2020 - Added nullish coalescing operator (??)
+
+Current Status:
+
+Modern browsers support ES6+ features
+
+Annual releases since 2015 with incremental improvements
+
+Backward compatibility maintained across versions
+
+These versions represent the evolution of JavaScript from a simple scripting language to a powerful programming language used for both frontend and backend development.
