@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Task -</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f5f5f5;
+        }
+
+   
+        .table-standard {
+            border-collapse: separate;
+            border-spacing: 1px;
+            width: 100%;
+            margin-bottom: 50px;
+            background-color: white;
+        }
+
+        .table-standard th {
+            background-color: #a8d5d8;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 900;
+            color: #2c5555;
+        }
+
+        .table-standard td {
+            background-color: #a8d5d8;
+            padding: 12px 20px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: normal;
+            color: #2c5555;
+        }
+
+
+        .table-rounded {
+            border-collapse: separate;
+            border-spacing: 8px;
+            width: 100%;
+            background-color: #a8d5d8;
+            border: 2px solid #333333;
+            border-radius: 15px;
+            padding: 8px;
+        }
+
+        .table-rounded th,
+        .table-rounded td {
+            background-color: #a8d5d8;
+            border: 2px solid #333333;
+            border-radius: 20px;
+            padding: 12px 20px;
+            font-size: 16px;
+            color: #2c5555;
+        }
+
+        .table-rounded th {
+            text-align: center;
+            font-weight: 900;
+        }
+
+        .table-rounded td {
+            text-align: left;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    
+    <table class="table-standard">
+        <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Jill</td>
+                <td>Smith</td>
+                <td>50</td>
+            </tr>
+            <tr>
+                <td>Eve</td>
+                <td>Jackson</td>
+                <td>94</td>
+            </tr>
+            <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>80</td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+    <table class="table-rounded">
+        <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Jill</td>
+                <td>Smith</td>
+                <td>50</td>
+            </tr>
+            <tr>
+                <td>Eve</td>
+                <td>Jackson</td>
+                <td>94</td>
+            </tr>
+            <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>80</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

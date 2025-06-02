@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Task</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        
+        .link-section {
+            border: 2px solid #ccc;
+            padding: 15px;
+            margin: 10px 0;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            color: blue;
+            text-decoration: underline;
+        }
+        
+        a:visited {
+            color: purple;
+        }
+        
+        .link-list {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="link-section">
+        <p><strong>Click any of the following links</strong></p>
+        <div class="link-list">
+            <a href="#" target="_blank">Opens in New</a> | 
+            <a href="#" target="_self">Opens in Self</a> | 
+            <a href="#" target="_parent">Opens in Parent</a> | 
+            <a href="#" target="_top">Opens in Body</a>
+        </div>
+    </div>
+
+    <div class="link-section">
+        <h3>Link to an Email Address</h3>
+        <p>To create a link that opens in the user's email program (to let them send a new email), use mailto: inside the href attribute:</p>
+        <a href="mailto:akshatsinhasramhardy@gmail.com?subject=Inquiry&body=Hello%20Akshat,">Send email</a>
+
+    </div>
+</body>
+</html>
