@@ -1,0 +1,52 @@
+1. Explain CSS Opacity with example.
+CSS opacity controls the transparency level of an element. The value ranges from 0 (completely transparent) to 1 (fully opaque).
+
+Example:
+
+css
+Copy
+Edit
+div {
+  opacity: 0.5;
+}
+This will make the div 50% transparent.
+
+2. Write about the new color names in CSS.
+CSS now supports modern color names as part of the CSS Color Module Level 4, such as rebeccapurple, lightgoldenrodyellow, and extended keywords like currentColor and transparent. Additionally, system colors and color-mix() support more dynamic styling.
+
+3. Explain Linear Gradient with example.
+A linear gradient creates a smooth transition between two or more colors along a straight line.
+
+Example:
+
+css
+Copy
+Edit
+background: linear-gradient(to right, red, yellow);
+This applies a gradient from red (left) to yellow (right).
+
+4. Explain Radial Gradient with example.
+A radial gradient radiates from a center point outward, creating a circular or elliptical color transition.
+
+Example:
+
+css
+Copy
+Edit
+background: radial-gradient(circle, blue, white);
+This makes a gradient starting with blue at the center and fading into white.
+
+5. Explain image masks with example.
+Image masks allow parts of an image or element to be visible or hidden using a mask image or shape.
+
+Example:
+
+css
+Copy
+Edit
+.masked {
+  -webkit-mask-image: url(mask.png);
+  mask-image: url(mask.png);
+}
+This applies a mask.png shape to the element, showing only parts defined by the mask.
+
