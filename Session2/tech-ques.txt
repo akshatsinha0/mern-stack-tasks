@@ -1,0 +1,82 @@
+1. What is HTML?
+HTML (HyperText Markup Language) is the standard markup language used to create web pages. It describes the structure and content of web pages using tags and elements that tell browsers how to display text, images, and other content.
+
+2. Explain the history of HTML?
+HTML was created by Tim Berners-Lee at CERN in 1990-1991. The first official version was published in 1993. Major versions include HTML 2.0 (1995), HTML 4.01 (1999), XHTML (2000), and HTML5 (2014). HTML evolved from a simple document sharing system for scientists to the foundation of the modern web.
+
+3. What are the prerequisites to run the HTML program?
+No special prerequisites needed:
+
+A simple text editor (Notepad, VS Code, TextEdit)
+
+A web browser (Chrome, Firefox, Safari, Edge)
+
+Basic computer literacy
+
+Save files with .html extension
+
+4. Explain the simple HTML program
+Basic HTML structure:
+
+xml
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+</head>
+<body>
+    <h1>My First Heading</h1>
+    <p>My first paragraph.</p>
+</body>
+</html>
+Elements explained:
+
+<!DOCTYPE html> - Document type declaration
+
+<html> - Root element
+
+<head> - Contains metadata
+
+<title> - Page title shown in browser tab
+
+<body> - Visible page content
+
+5. Write programs for heading and paragraph tags?
+xml
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Headings and Paragraphs</title>
+</head>
+<body>
+    <h1>Main Heading</h1>
+    <h2>Subheading Level 2</h2>
+    <h3>Subheading Level 3</h3>
+    <h4>Subheading Level 4</h4>
+    <h5>Subheading Level 5</h5>
+    <h6>Subheading Level 6</h6>
+    
+    <p>This is a paragraph with some text content.</p>
+    <p>This is another paragraph demonstrating multiple paragraphs.</p>
+</body>
+</html>
+6. Write HTML programs for bold, italic, underline, sup, sub, br, hr tags
+xml
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Text Formatting</title>
+</head>
+<body>
+    <p>This text is <b>bold</b></p>
+    <p>This text is <i>italic</i></p>
+    <p>This text is <u>underlined</u></p>
+    <p>This is <sup>superscript</sup> text</p>
+    <p>This is <sub>subscript</sub> text</p>
+    <p>Line break example:<br/>New line after break</p>
+    <p>Horizontal rule below:</p>
+    <hr/>
+    <p>Content after horizontal rule</p>
+</body>
+</html>
+These examples demonstrate the fundamental building blocks of HTML for creating structured, formatted web content.

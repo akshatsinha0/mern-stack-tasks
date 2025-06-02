@@ -1,0 +1,88 @@
+1. What is CSS?
+CSS (Cascading Style Sheets) is a stylesheet language used to describe the presentation and styling of documents written in HTML or XML. CSS controls how elements should be rendered on screen, including layout, colors, fonts, and spacing, separating content from visual presentation.
+
+2. What are the benefits of CSS?
+Key benefits of CSS include:
+
+Separation of content and style - cleaner, more organized code
+
+Consistency - uniform styling across multiple web pages
+
+Faster loading times - external CSS files can be cached by browsers
+
+Responsive design - adaptable to different screen sizes and devices
+
+Time-saving - write once, use across multiple pages
+
+Better user experience - enhanced visual design and animations
+
+Easy maintenance - changes can be made globally from one file
+
+3. Explain version history of CSS
+CSS evolution timeline:
+
+CSS1 (1996): First official specification with basic font, text, color, and background properties
+
+CSS2 (1998): Added positioning, layout control, media types, and new font properties like shadows
+
+CSS2.1 (2011): Revised CSS2, fixing errors and removing poorly supported features
+
+CSS3 (ongoing): Modular approach with individual modules having separate version numbers rather than one unified specification
+
+Current: CSS is now just "CSS" with individual modules progressing independently
+
+4. Explain syntax of CSS
+CSS syntax structure:
+
+css
+selector { property: value; }
+Components:
+
+Selector - points to the HTML element to style (e.g., p, h1)
+
+Declaration block - contains declarations surrounded by curly braces {}
+
+Property - the style attribute to change (e.g., color, font-size)
+
+Value - assigned to the property (e.g., red, 20px)
+
+Semicolon - separates multiple declarations
+
+Example:
+
+css
+p {
+    color: red;
+    text-align: center;
+}
+5. Write a simple CSS program to show Hello World Concept
+xml
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS Hello World</title>
+    <style>
+        body {
+            background-color: #2D2D2D;
+            font-family: Arial, sans-serif;
+        }
+        
+        h1 {
+            color: #C26356;
+            font-size: 30px;
+            text-align: center;
+        }
+        
+        p {
+            color: white;
+            text-align: center;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello, CSS World!</h1>
+    <p>This is my first CSS styled page with Hello World concept.</p>
+</body>
+</html>
+This example demonstrates basic CSS styling with selectors, properties, and values to create a simple "Hello World" webpage

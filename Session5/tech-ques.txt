@@ -1,0 +1,104 @@
+1. What is HTML forms?
+HTML forms are interactive sections of web pages that collect user input and send it to a server for processing. Forms use the <form> element as a container for various input elements like text fields, checkboxes, radio buttons, and submit buttons.
+
+Basic structure:
+
+xml
+<form action="/submit-form" method="post">
+    <!-- Form elements go here -->
+</form>
+2. What are the uses of HTML forms?
+HTML forms are used for various purposes including:
+
+User registration and login
+
+Search queries
+
+Feedback submissions
+
+Contact forms
+
+Survey questionnaires
+
+Newsletter subscriptions
+
+E-commerce checkout processes
+
+Data collection and user interaction
+
+3. Explain textfield with example
+Text fields use <input type="text"> to create single-line input areas for user text entry.
+
+Example:
+
+xml
+<form>
+    <label for="fname">First Name:</label>
+    <input type="text" id="fname" name="fname" placeholder="Enter your name">
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+</form>
+Key attributes:
+
+name - identifies the field when submitted
+
+id - links to label element
+
+placeholder - shows hint text
+
+required - makes field mandatory
+
+4. Explain checkbox with example
+Checkboxes use <input type="checkbox"> to let users select multiple options from a list.
+
+Example:
+
+xml
+<form>
+    <p>Select your hobbies:</p>
+    <input type="checkbox" id="reading" name="hobbies" value="reading">
+    <label for="reading">Reading</label><br>
+    
+    <input type="checkbox" id="sports" name="hobbies" value="sports">
+    <label for="sports">Sports</label><br>
+    
+    <input type="checkbox" id="music" name="hobbies" value="music">
+    <label for="music">Music</label>
+</form>
+Features:
+
+Users can select zero, one, or multiple options
+
+Same name attribute groups related checkboxes
+
+value attribute defines what gets submitted
+
+5. Explain radio button with example
+Radio buttons use <input type="radio"> to let users select only one option from a group.
+
+Example:
+
+xml
+<form>
+    <p>Select your gender:</p>
+    <input type="radio" id="male" name="gender" value="male">
+    <label for="male">Male</label><br>
+    
+    <input type="radio" id="female" name="gender" value="female">
+    <label for="female">Female</label><br>
+    
+    <input type="radio" id="other" name="gender" value="other">
+    <label for="other">Other</label>
+</form>
+Key points:
+
+All radio buttons in a group must share the same name attribute
+
+Only one option can be selected at a time
+
+Selecting one automatically deselects others in the same group
+
+value attribute defines the submitted data
+
+These form elements work together to create interactive user interfaces for data collection and submission.

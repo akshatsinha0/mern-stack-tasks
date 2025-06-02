@@ -1,4 +1,4 @@
-CSS Properties Technical Questions - Answers
+CSS Properties Technical Questions - Answers (Toward the end of the sessions questions)
 
 
 1. Text-Transform Property in CSS
@@ -107,3 +107,82 @@ css
 h1 { font-size: 24px; }
 p { font-size: 1.2em; }
 small { font-size: 80%; }
+
+
+
+IN-BETWEEN TECHNICAL QUESTIONS:
+1. What are the CSS units of measurement?
+CSS uses units like:
+
+px (pixels): fixed size
+
+em/rem: relative to font size
+
+%: relative to parent element
+
+vw/vh: relative to viewport width/height
+
+cm, mm, in: print-specific units
+These help control size, spacing, and layout.
+
+2. What are the different types of SELECTORS in CSS?
+Common types include:
+
+Universal selector (*)
+
+Type selector (div, p, etc.)
+
+Class selector (.className)
+
+ID selector (#idName)
+
+Attribute selector ([type="text"])
+
+Pseudo-classes (:hover, :first-child)
+
+Pseudo-elements (::before, ::after)
+
+3. Explain CSS background-color property.
+This property sets the background color of an element.
+Example:
+
+css
+Copy
+Edit
+body {
+  background-color: lightblue;
+}
+4. Explain CSS background-image property with example.
+It sets an image as the background of an element.
+Example:
+
+css
+Copy
+Edit
+div {
+  background-image: url('image.jpg');
+}
+5. Explain CSS background-repeat property with example.
+It controls if/how a background image repeats.
+Example:
+
+css
+Copy
+Edit
+div {
+  background-image: url('pattern.png');
+  background-repeat: no-repeat;
+}
+Values: repeat, no-repeat, repeat-x, repeat-y.
+
+6. Explain the CSS cursors.
+CSS cursors define the mouse pointer's look.
+Example:
+
+css
+Copy
+Edit
+button {
+  cursor: pointer;
+}
+Other values: default, text, move, wait, etc.

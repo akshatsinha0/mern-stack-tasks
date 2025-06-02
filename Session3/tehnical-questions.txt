@@ -3,3 +3,137 @@ Ans) These links help to jump to another document. When we move the mouse over a
 
 Q2) Write the program to show how hyperlink can be added to images and list items.
 Ans) See the html file
+
+
+In - between the video Technical Questions:
+1. Explain table tag with example
+The <table> tag creates an HTML table to display data in rows and columns.
+
+Example:
+
+xml
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Age</th>
+  </tr>
+  <tr>
+    <td>John</td>
+    <td>25</td>
+  </tr>
+</table>
+Key elements:
+
+<table> - table container
+
+<tr> - table row
+
+<th> - table header
+
+<td> - table data cell
+
+2. Explain cellpadding and cellspacing with example
+Cellpadding: Space between cell content and cell border
+Cellspacing: Space between adjacent cells
+
+Example:
+
+xml
+<table cellpadding="10" cellspacing="5" border="1">
+  <tr>
+    <td>Cell 1</td>
+    <td>Cell 2</td>
+  </tr>
+</table>
+CSS alternative:
+
+css
+table { border-spacing: 5px; }
+td { padding: 10px; }
+3. Explain rowspan and colspan with example
+Colspan: Makes a cell span multiple columns
+Rowspan: Makes a cell span multiple rows
+
+Example:
+
+xml
+<table border="1">
+  <tr>
+    <th colspan="2">Name</th>
+    <th>Age</th>
+  </tr>
+  <tr>
+    <td>John</td>
+    <td>Smith</td>
+    <td rowspan="2">25</td>
+  </tr>
+  <tr>
+    <td>Jane</td>
+    <td>Doe</td>
+  </tr>
+</table>
+4. What is ordered list? Explain about the type attribute in ordered list
+An ordered list displays items with numbers or letters using <ol> tag.
+
+Type attribute values:
+
+type="1" - Numbers (default)
+
+type="A" - Uppercase letters
+
+type="a" - Lowercase letters
+
+type="I" - Uppercase Roman numerals
+
+type="i" - Lowercase Roman numerals
+
+Example:
+
+xml
+<ol type="A">
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Milk</li>
+</ol>
+5. What is unordered list? Explain the different type attributes in unordered list
+An unordered list displays items with bullets using <ul> tag.
+
+Type attributes (CSS):
+
+list-style-type: disc - Filled circle (default)
+
+list-style-type: circle - Empty circle
+
+list-style-type: square - Square bullet
+
+list-style-type: none - No marker
+
+Example:
+
+xml
+<ul style="list-style-type: square;">
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Milk</li>
+</ul>
+6. What is definition list? Explain with example
+A definition list displays terms and their descriptions using <dl>, <dt>, and <dd> tags.
+
+Elements:
+
+<dl> - Definition list container
+
+<dt> - Definition term
+
+<dd> - Definition description
+
+Example:
+
+xml
+<dl>
+  <dt>HTML</dt>
+  <dd>HyperText Markup Language</dd>
+  <dt>CSS</dt>
+  <dd>Cascading Style Sheets</dd>
+</dl>
+This creates a glossary-style list perfect for terms and definitions.
