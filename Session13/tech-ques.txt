@@ -1,0 +1,161 @@
+1. What are operators?
+Operators are symbols or keywords that tell the computer what operations to perform on values or variables. They're like mathematical symbols that perform calculations, comparisons, or logical operations. For example, + adds numbers, > compares values, and = assigns values to variables.
+
+2. Explain arithmetic operators with example
+Arithmetic operators perform basic math operations on numbers:
+
+Common arithmetic operators:
+
++ (Addition): 5 + 3 = 8
+
+- (Subtraction): 10 - 4 = 6
+
+* (Multiplication): 7 * 2 = 14
+
+/ (Division): 15 / 3 = 5
+
+% (Modulus): 17 % 5 = 2 (remainder)
+
+Example:
+
+c
+int a = 10, b = 3;
+int sum = a + b;        // 13
+int difference = a - b;  // 7
+int product = a * b;     // 30
+int quotient = a / b;    // 3
+int remainder = a % b;   // 1
+3. Explain logical operators with example
+Logical operators work with true/false conditions and are used to combine multiple conditions:
+
+Three main logical operators:
+
+&& (AND): Returns true only if both conditions are true
+
+|| (OR): Returns true if at least one condition is true
+
+! (NOT): Reverses the condition (true becomes false)
+
+Example:
+
+c
+int age = 25;
+int hasLicense = 1;
+
+if (age >= 18 && hasLicense) {
+    printf("Can drive legally");
+}
+
+if (age < 18 || !hasLicense) {
+    printf("Cannot drive");
+}
+4. Explain assignment operators with example
+Assignment operators assign values to variables. The basic one is =, but there are compound operators that combine operations with assignment:
+
+Assignment operators:
+
+= (Simple assignment): x = 5
+
++= (Add and assign): x += 3 (same as x = x + 3)
+
+-= (Subtract and assign): x -= 2 (same as x = x - 2)
+
+*= (Multiply and assign): x *= 4 (same as x = x * 4)
+
+Example:
+
+c
+int x = 10;    // x becomes 10
+x += 5;        // x becomes 15
+x -= 3;        // x becomes 12
+x *= 2;        // x becomes 24
+5. Explain if statement with example
+The if statement executes code only when a specific condition is true. It's like asking "if this is true, then do that."
+
+Syntax:
+
+c
+if (condition) {
+    // code to execute if condition is true
+}
+Example:
+
+c
+int temperature = 30;
+
+if (temperature > 25) {
+    printf("It's a hot day!");
+}
+
+if (temperature < 0) {
+    printf("It's freezing!");
+}
+6. Explain switch statement with example
+The switch statement checks a variable against multiple possible values and executes different code for each case. It's like a multi-way decision maker.
+
+Example:
+
+c
+int day = 3;
+
+switch (day) {
+    case 1:
+        printf("Monday");
+        break;
+    case 2:
+        printf("Tuesday");
+        break;
+    case 3:
+        printf("Wednesday");
+        break;
+    default:
+        printf("Invalid day");
+        break;
+}
+7. Explain looping statements with example
+Loops repeat code multiple times. There are three main types:
+
+For loop - when you know how many times to repeat:
+
+c
+for (int i = 1; i <= 5; i++) {
+    printf("%d ", i);  // Prints: 1 2 3 4 5
+}
+While loop - repeats while condition is true:
+
+c
+int count = 1;
+while (count <= 3) {
+    printf("Count: %d\n", count);
+    count++;
+}
+Do-while loop - executes at least once, then checks condition:
+
+c
+int num = 5;
+do {
+    printf("Number: %d\n", num);
+    num--;
+} while (num > 0);
+8. Explain loop control statements with example
+Loop control statements change the normal flow of loops:
+
+Break - exits the loop immediately:
+
+c
+for (int i = 1; i <= 10; i++) {
+    if (i == 5) {
+        break;  // Stops loop when i equals 5
+    }
+    printf("%d ", i);  // Prints: 1 2 3 4
+}
+Continue - skips current iteration and moves to next:
+
+c
+for (int i = 1; i <= 5; i++) {
+    if (i == 3) {
+        continue;  // Skips printing 3
+    }
+    printf("%d ", i);  // Prints: 1 2 4 5
+}
+These concepts form the building blocks of programming logic and control flow.
