@@ -147,8 +147,7 @@ This property sets the background color of an element.
 Example:
 
 css
-Copy
-Edit
+
 body {
   background-color: lightblue;
 }
@@ -157,8 +156,7 @@ It sets an image as the background of an element.
 Example:
 
 css
-Copy
-Edit
+
 div {
   background-image: url('image.jpg');
 }
@@ -167,8 +165,7 @@ It controls if/how a background image repeats.
 Example:
 
 css
-Copy
-Edit
+
 div {
   background-image: url('pattern.png');
   background-repeat: no-repeat;
@@ -180,8 +177,7 @@ CSS cursors define the mouse pointer's look.
 Example:
 
 css
-Copy
-Edit
+
 button {
   cursor: pointer;
 }
