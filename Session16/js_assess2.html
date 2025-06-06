@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Number Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 500px;
+            max-width: 90%;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .form-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .form-table td {
+            padding: 10px;
+            vertical-align: top;
+        }
+
+        .form-table td:first-child {
+            width: 30%;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="number"]:focus {
+            border-color: #4CAF50;
+        }
+
+        .result-area {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 14px;
+            resize: vertical;
+            outline: none;
+            background-color: #fafafa;
+        }
+
+        .generate-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .generate-btn:hover {
+            background-color: #45a049;
+        }
+
+        .generate-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .error {
+            color: #ff4444;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .stats {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e8f5e8;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">Prime Number Generator</div>
+        
+        <table class="form-table">
+            <tr>
+                <td>Start</td>
+                <td>
+                    <input type="number" id="startInput" min="1" value="2" placeholder="Enter start number">
+                    <div id="startError" class="error"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>End</td>
+                <td>
+                    <input type="number" id="endInput" min="1" value="100" placeholder="Enter end number">
+                    <div id="endError" class="error"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>Prime Number</td>
+                <td>
+                    <textarea id="primeResult" class="result-area" readonly placeholder="Prime numbers will appear here..."></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button id="generateBtn" class="generate-btn" onclick="generatePrimes()">Generate</button>
+                    <div id="stats" class="stats" style="display: none;"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        // Prime number checking function using optimized trial division
+        function isPrime(num) {
+            if (num < 2) return false;
+            if (num === 2) return true;
+            if (num % 2 === 0) return false;
+            
+            // Check odd divisors up to square root
+            const sqrt = Math.sqrt(num);
+            for (let i = 3; i <= sqrt; i += 2) {
+                if (num % i === 0) return false;
+            }
+            return true;
+        }
+
+        // Sieve of Eratosthenes for efficient prime generation
+        function sieveOfEratosthenes(start, end) {
+            if (end < 2) return [];
+            
+            // Create boolean array for numbers 0 to end
+            const sieve = new Array(end + 1).fill(true);
+            sieve[0] = sieve[1] = false;
+            
+            // Sieve algorithm
+            for (let i = 2; i * i <= end; i++) {
+                if (sieve[i]) {
+                    for (let j = i * i; j <= end; j += i) {
+                        sieve[j] = false;
+                    }
+                }
+            }
+            
+            // Collect primes in the range
+            const primes = [];
+            for (let i = Math.max(start, 2); i <= end; i++) {
+                if (sieve[i]) {
+                    primes.push(i);
+                }
+            }
+            
+            return primes;
+        }
+
+        // Trial division method for smaller ranges
+        function trialDivisionPrimes(start, end) {
+            const primes = [];
+            for (let num = Math.max(start, 2); num <= end; num++) {
+                if (isPrime(num)) {
+                    primes.push(num);
+                }
+            }
+            return primes;
+        }
+
+        // Input validation function
+        function validateInputs() {
+            const startInput = document.getElementById('startInput');
+            const endInput = document.getElementById('endInput');
+            const startError = document.getElementById('startError');
+            const endError = document.getElementById('endError');
+            
+            let isValid = true;
+            
+            // Clear previous errors
+            startError.textContent = '';
+            endError.textContent = '';
+            
+            const start = parseInt(startInput.value);
+            const end = parseInt(endInput.value);
+            
+            // Validate start number
+            if (isNaN(start) || start < 1) {
+                startError.textContent = 'Please enter a valid positive number';
+                isValid = false;
+            }
+            
+            // Validate end number
+            if (isNaN(end) || end < 1) {
+                endError.textContent = 'Please enter a valid positive number';
+                isValid = false;
+            }
+            
+            // Validate range
+            if (isValid && start > end) {
+                endError.textContent = 'End number must be greater than or equal to start number';
+                isValid = false;
+            }
+            
+            // Check for reasonable upper limit
+            if (isValid && end > 1000000) {
+                endError.textContent = 'Please use a number less than 1,000,000 for performance';
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+
+        // Main prime generation function
+        function generatePrimes() {
+            if (!validateInputs()) return;
+            
+            const startInput = document.getElementById('startInput');
+            const endInput = document.getElementById('endInput');
+            const resultArea = document.getElementById('primeResult');
+            const generateBtn = document.getElementById('generateBtn');
+            const statsDiv = document.getElementById('stats');
+            
+            const start = parseInt(startInput.value);
+            const end = parseInt(endInput.value);
+            
+            // Show loading state
+            generateBtn.disabled = true;
+            generateBtn.textContent = 'Generating...';
+            resultArea.value = 'Calculating prime numbers...';
+            
+            // Use setTimeout to allow UI update
+            setTimeout(() => {
+                const startTime = performance.now();
+                
+                let primes;
+                const range = end - start;
+                
+                // Choose algorithm based on range size
+                if (range > 10000) {
+                    primes = sieveOfEratosthenes(start, end);
+                } else {
+                    primes = trialDivisionPrimes(start, end);
+                }
+                
+                const endTime = performance.now();
+                const executionTime = (endTime - startTime).toFixed(2);
+                
+                // Display results
+                if (primes.length === 0) {
+                    resultArea.value = `No prime numbers found between ${start} and ${end}`;
+                } else {
+                    resultArea.value = primes.join(', ');
+                }
+                
+                // Show statistics
+                statsDiv.style.display = 'block';
+                statsDiv.innerHTML = `
+                    <strong>Statistics:</strong><br>
+                    Range: ${start} to ${end}<br>
+                    Prime count: ${primes.length}<br>
+                    Execution time: ${executionTime} ms<br>
+                    Algorithm: ${range > 10000 ? 'Sieve of Eratosthenes' : 'Trial Division'}
+                `;
+                
+                // Reset button state
+                generateBtn.disabled = false;
+                generateBtn.textContent = 'Generate';
+            }, 10);
+        }
+
+        // Event listeners for Enter key
+        document.getElementById('startInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') generatePrimes();
+        });
+
+        document.getElementById('endInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') generatePrimes();
+        });
+
+        // Auto-generate on page load
+        window.onload = function() {
+            generatePrimes();
+        };
+    </script>
+</body>
+</html>
