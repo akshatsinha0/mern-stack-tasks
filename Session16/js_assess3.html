@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 350px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo h1 {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 42px;
+            background: linear-gradient(45deg, #405de6, #833ab4, #e1306c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 400;
+            letter-spacing: -1px;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 16px 20px 16px 50px;
+            border: 1px solid #dbdbdb;
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: #fafafa;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #405de6;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(64, 93, 230, 0.1);
+        }
+
+        .form-group input.error {
+            border-color: #ed4956;
+            background-color: #fff5f5;
+        }
+
+        .form-group input.success {
+            border-color: #42a942;
+            background-color: #f0fff0;
+        }
+
+        .form-group .icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8e8e8e;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .form-group input:focus + .icon {
+            color: #405de6;
+        }
+
+        .form-group input.error + .icon {
+            color: #ed4956;
+        }
+
+        .form-group input.success + .icon {
+            color: #42a942;
+        }
+
+        .error-message {
+            color: #ed4956;
+            font-size: 12px;
+            margin-top: 5px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .error-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 12px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #405de6;
+        }
+
+        .forget-password {
+            color: #405de6;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .forget-password:hover {
+            color: #365bbf;
+            text-decoration: underline;
+        }
+
+        .login-button {
+            width: 100%;
+            background: linear-gradient(45deg, #405de6, #5851db);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 16px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-button:hover:not(:disabled) {
+            background: linear-gradient(45deg, #365bbf, #4a46c7);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(64, 93, 230, 0.3);
+        }
+
+        .login-button:disabled {
+            background: #b3b3b3;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .login-button .loader {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+
+        .login-button.loading .loader {
+            display: inline-block;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #8e8e8e;
+        }
+
+        .signup-link a {
+            color: #405de6;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .signup-link a:hover {
+            color: #365bbf;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                margin: 0;
+                border-radius: 0;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+        }
+
+        .shake {
+            animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <h1>Instagram</h1>
+        </div>
+
+        <form id="loginForm" class="login-form" novalidate>
+            <div class="form-group">
+                <input 
+                    type="text" 
+                    id="username" 
+                    name="username" 
+                    placeholder="Username" 
+                    autocomplete="username"
+                    data-validation="username"
+                >
+                <span class="icon">👤</span>
+                <div class="error-message" id="username-error"></div>
+            </div>
+
+            <div class="form-group">
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="Password" 
+                    autocomplete="current-password"
+                    data-validation="password"
+                >
+                <span class="icon">🔒</span>
+                <div class="error-message" id="password-error"></div>
+            </div>
+
+            <div class="form-options">
+                <label class="remember-me">
+                    <input type="checkbox" id="rememberMe" name="rememberMe">
+                    <span>Remember me</span>
+                </label>
+                <a href="#" class="forget-password" id="forgetPassword">Forget Password?</a>
+            </div>
+
+            <button type="submit" class="login-button" id="loginButton">
+                <span class="loader"></span>
+                <span class="button-text">Log in</span>
+            </button>
+        </form>
+
+        <div class="signup-link">
+            Don't have an account? <a href="#" id="signupLink">Sign up here.</a>
+        </div>
+    </div>
+
+    <script>
+        class InstagramLogin {
+            constructor() {
+                this.form = document.getElementById('loginForm');
+                this.usernameField = document.getElementById('username');
+                this.passwordField = document.getElementById('password');
+                this.rememberMeCheckbox = document.getElementById('rememberMe');
+                this.loginButton = document.getElementById('loginButton');
+                
+                this.validators = new Map();
+                this.debounceTimers = new Map();
+                
+                this.initializeValidators();
+                this.bindEvents();
+                this.loadSavedCredentials();
+                this.setupAccessibility();
+            }
+
+            initializeValidators() {
+                this.validators.set('username', {
+                    rules: [
+                        {
+                            test: (value) => value.length >= 1,
+                            message: 'Username is required'
+                        },
+                        {
+                            test: (value) => /^[a-zA-Z0-9._]+$/.test(value),
+                            message: 'Username can only contain letters, numbers, dots, and underscores'
+                        },
+                        {
+                            test: (value) => value.length >= 3,
+                            message: 'Username must be at least 3 characters long'
+                        },
+                        {
+                            test: (value) => value.length <= 30,
+                            message: 'Username must be less than 30 characters'
+                        }
+                    ]
+                });
+
+                this.validators.set('password', {
+                    rules: [
+                        {
+                            test: (value) => value.length >= 1,
+                            message: 'Password is required'
+                        },
+                        {
+                            test: (value) => value.length >= 6,
+                            message: 'Password must be at least 6 characters long'
+                        }
+                    ]
+                });
+            }
+
+            bindEvents() {
+                // Form submission
+                this.form.addEventListener('submit', this.handleSubmit.bind(this));
+
+                // Real-time validation with debouncing
+                [this.usernameField, this.passwordField].forEach(field => {
+                    field.addEventListener('input', (e) => this.debounceValidation(e.target));
+                    field.addEventListener('blur', (e) => this.validateField(e.target));
+                    field.addEventListener('focus', (e) => this.clearFieldError(e.target));
+                });
+
+                // Remember me functionality
+                this.rememberMeCheckbox.addEventListener('change', this.handleRememberMe.bind(this));
+
+                // Forget password
+                document.getElementById('forgetPassword').addEventListener('click', this.handleForgetPassword.bind(this));
+
+                // Signup link
+                document.getElementById('signupLink').addEventListener('click', this.handleSignupRedirect.bind(this));
+
+                // Keyboard navigation
+                document.addEventListener('keydown', this.handleKeyboardNavigation.bind(this));
+            }
+
+            debounceValidation(field) {
+                const fieldName = field.name;
+                
+                if (this.debounceTimers.has(fieldName)) {
+                    clearTimeout(this.debounceTimers.get(fieldName));
+                }
+
+                const timer = setTimeout(() => {
+                    this.validateField(field);
+                }, 300);
+
+                this.debounceTimers.set(fieldName, timer);
+            }
+
+            validateField(field) {
+                const fieldName = field.getAttribute('data-validation');
+                const value = field.value.trim();
+                const validator = this.validators.get(fieldName);
+
+                if (!validator) return true;
+
+                // Clear previous states
+                this.clearFieldError(field);
+
+                // Run validation rules
+                for (const rule of validator.rules) {
+                    if (!rule.test(value)) {
+                        this.showFieldError(field, rule.message);
+                        return false;
+                    }
+                }
+
+                this.showFieldSuccess(field);
+                return true;
+            }
+
+            showFieldError(field, message) {
+                field.classList.remove('success');
+                field.classList.add('error');
+                
+                const errorElement = document.getElementById(`${field.name}-error`);
+                errorElement.textContent = message;
+                errorElement.classList.add('show');
+
+                // Accessibility
+                field.setAttribute('aria-invalid', 'true');
+                field.setAttribute('aria-describedby', `${field.name}-error`);
+            }
+
+            showFieldSuccess(field) {
+                field.classList.remove('error');
+                field.classList.add('success');
+                
+                const errorElement = document.getElementById(`${field.name}-error`);
+                errorElement.classList.remove('show');
+
+                // Accessibility
+                field.setAttribute('aria-invalid', 'false');
+                field.removeAttribute('aria-describedby');
+            }
+
+            clearFieldError(field) {
+                field.classList.remove('error', 'success');
+                
+                const errorElement = document.getElementById(`${field.name}-error`);
+                errorElement.classList.remove('show');
+
+                // Accessibility
+                field.removeAttribute('aria-invalid');
+                field.removeAttribute('aria-describedby');
+            }
+
+            async handleSubmit(e) {
+                e.preventDefault();
+
+                // Validate all fields
+                const isUsernameValid = this.validateField(this.usernameField);
+                const isPasswordValid = this.validateField(this.passwordField);
+
+                if (!isUsernameValid || !isPasswordValid) {
+                    this.shakeForm();
+                    return;
+                }
+
+                // Show loading state
+                this.setLoadingState(true);
+
+                try {
+                    // Simulate API call
+                    const result = await this.authenticateUser({
+                        username: this.usernameField.value.trim(),
+                        password: this.passwordField.value,
+                        rememberMe: this.rememberMeCheckbox.checked
+                    });
+
+                    if (result.success) {
+                        this.handleLoginSuccess(result);
+                    } else {
+                        this.handleLoginError(result.error);
+                    }
+                } catch (error) {
+                    this.handleLoginError('Network error. Please try again.');
+                } finally {
+                    this.setLoadingState(false);
+                }
+            }
+
+            async authenticateUser(credentials) {
+                // Simulate API delay
+                await new Promise(resolve => setTimeout(resolve, 2000));
+
+                // Simulate authentication logic
+                const validCredentials = [
+                    { username: 'demo_user', password: 'password123' },
+                    { username: 'test_account', password: 'test123' },
+                    { username: 'john_doe', password: 'johndoe2023' }
+                ];
+
+                const isValid = validCredentials.some(cred => 
+                    cred.username === credentials.username && 
+                    cred.password === credentials.password
+                );
+
+                if (isValid) {
+                    // Save credentials if remember me is checked
+                    if (credentials.rememberMe) {
+                        this.saveCredentials(credentials.username);
+                    }
+
+                    return {
+                        success: true,
+                        user: {
+                            username: credentials.username,
+                            id: Math.random().toString(36).substr(2, 9)
+                        }
+                    };
+                } else {
+                    return {
+                        success: false,
+                        error: 'Invalid username or password'
+                    };
+                }
+            }
+
+            handleLoginSuccess(result) {
+                // Store session
+                sessionStorage.setItem('instagram_user', JSON.stringify(result.user));
+                
+                // Success animation
+                this.loginButton.style.background = 'linear-gradient(45deg, #42a942, #369636)';
+                this.loginButton.querySelector('.button-text').textContent = 'Success!';
+
+                // Redirect after animation
+                setTimeout(() => {
+                    alert(`Welcome back, ${result.user.username}! 🎉\n\nRedirecting to dashboard...`);
+                    // window.location.href = '/dashboard';
+                }, 1000);
+            }
+
+            handleLoginError(error) {
+                this.shakeForm();
+                
+                // Show error on both fields
+                this.showFieldError(this.usernameField, error);
+                this.showFieldError(this.passwordField, error);
+
+                // Focus back to username
+                this.usernameField.focus();
+            }
+
+            setLoadingState(isLoading) {
+                this.loginButton.disabled = isLoading;
+                this.loginButton.classList.toggle('loading', isLoading);
+                
+                const buttonText = this.loginButton.querySelector('.button-text');
+                buttonText.textContent = isLoading ? 'Logging in...' : 'Log in';
+            }
+
+            shakeForm() {
+                this.form.parentElement.classList.add('shake');
+                setTimeout(() => {
+                    this.form.parentElement.classList.remove('shake');
+                }, 820);
+            }
+
+            saveCredentials(username) {
+                try {
+                    localStorage.setItem('instagram_remember_username', username);
+                    localStorage.setItem('instagram_remember_me', 'true');
+                } catch (error) {
+                    console.warn('Could not save credentials to localStorage');
+                }
+            }
+
+            loadSavedCredentials() {
+                try {
+                    const shouldRemember = localStorage.getItem('instagram_remember_me') === 'true';
+                    const savedUsername = localStorage.getItem('instagram_remember_username');
+
+                    if (shouldRemember && savedUsername) {
+                        this.usernameField.value = savedUsername;
+                        this.rememberMeCheckbox.checked = true;
+                    }
+                } catch (error) {
+                    console.warn('Could not load saved credentials from localStorage');
+                }
+            }
+
+            handleRememberMe() {
+                if (!this.rememberMeCheckbox.checked) {
+                    // Clear saved credentials
+                    try {
+                        localStorage.removeItem('instagram_remember_username');
+                        localStorage.removeItem('instagram_remember_me');
+                    } catch (error) {
+                        console.warn('Could not clear saved credentials');
+                    }
+                }
+            }
+
+            handleForgetPassword(e) {
+                e.preventDefault();
+                
+                const username = this.usernameField.value.trim();
+                const message = username 
+                    ? `Password reset link will be sent to the email associated with "${username}"`
+                    : 'Please enter your username first, then click "Forget Password?"';
+                
+                alert(message);
+                
+                if (!username) {
+                    this.usernameField.focus();
+                }
+            }
+
+            handleSignupRedirect(e) {
+                e.preventDefault();
+                alert('Redirecting to Instagram signup page...');
+                // window.location.href = '/signup';
+            }
+
+            handleKeyboardNavigation(e) {
+                // Enter key on username field should focus password
+                if (e.target === this.usernameField && e.key === 'Enter') {
+                    e.preventDefault();
+                    this.passwordField.focus();
+                }
+
+                // Escape key should clear focus
+                if (e.key === 'Escape') {
+                    document.activeElement.blur();
+                }
+            }
+
+            setupAccessibility() {
+                // Add ARIA labels
+                this.usernameField.setAttribute('aria-label', 'Username');
+                this.passwordField.setAttribute('aria-label', 'Password');
+                this.rememberMeCheckbox.setAttribute('aria-label', 'Remember me');
+                this.loginButton.setAttribute('aria-label', 'Log in to Instagram');
+
+                // Add role attributes
+                this.form.setAttribute('role', 'form');
+                
+                // Add live region for announcements
+                const liveRegion = document.createElement('div');
+                liveRegion.setAttribute('aria-live', 'polite');
+                liveRegion.setAttribute('aria-atomic', 'true');
+                liveRegion.style.position = 'absolute';
+                liveRegion.style.left = '-10000px';
+                liveRegion.style.width = '1px';
+                liveRegion.style.height = '1px';
+                liveRegion.style.overflow = 'hidden';
+                document.body.appendChild(liveRegion);
+                
+                this.liveRegion = liveRegion;
+            }
+
+            announceToScreenReader(message) {
+                if (this.liveRegion) {
+                    this.liveRegion.textContent = message;
+                }
+            }
+        }
+
+        // Initialize the application when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            window.instagramLogin = new InstagramLogin();
+        });
+
+        // Service Worker registration for PWA capabilities
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => console.log('SW registered'))
+                    .catch(error => console.log('SW registration failed'));
+            });
+        }
+    </script>
+</body>
+</html>
