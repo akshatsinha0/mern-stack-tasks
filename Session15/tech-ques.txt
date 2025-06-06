@@ -1,0 +1,96 @@
+1. Explain arrays in JavaScript with example.
+Arrays in JavaScript are used to store multiple values in a single variable.
+
+Example:
+
+javascript
+  
+  
+let fruits = ["Apple", "Banana", "Mango"];
+console.log(fruits[0]); // Output: Apple
+
+2. Explain strings in JavaScript with example.
+Strings are sequences of characters used to store and manipulate text.
+
+Example:
+
+javascript
+  
+  
+let greeting = "Hello, World!";
+console.log(greeting.length); // Output: 13
+
+3. Explain the following string methods with example.
+Common methods:
+
+toUpperCase():
+
+javascript
+  
+  
+"hello".toUpperCase(); // "HELLO"
+slice():
+
+javascript
+  
+  
+"hello".slice(1, 4); // "ell"
+replace():
+
+javascript
+  
+  
+"I like JS".replace("JS", "JavaScript"); // "I like JavaScript"
+
+4. Explain the use of strict keyword.
+The "use strict" directive enforces stricter parsing and error handling in JavaScript. It prevents the use of undeclared variables and other unsafe actions.
+
+Example:
+
+javascript
+  
+  
+"use strict";
+x = 5; // Error: x is not defined
+
+5. What are the different ways of creating objects in JavaScript?
+Object literal:
+
+javascript
+  
+  
+let person = { name: "John", age: 30 };
+Using new Object():
+
+javascript
+  
+  
+let person = new Object();
+person.name = "John";
+Constructor function:
+
+javascript
+  
+  
+function Person(name) {
+  this.name = name;
+}
+let p = new Person("John");
+ES6 Class:
+
+ 
+  
+  
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+}
+let p = new Person("John");
+Object.create():
+
+javascript
+  
+  
+let proto = { greet: () => "Hello" };
+let person = Object.create(proto);

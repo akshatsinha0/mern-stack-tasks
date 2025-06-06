@@ -4,8 +4,7 @@ CSS opacity controls the transparency level of an element. The value ranges from
 Example:
 
 css
-Copy
-Edit
+
 div {
   opacity: 0.5;
 }
@@ -20,8 +19,7 @@ A linear gradient creates a smooth transition between two or more colors along a
 Example:
 
 css
-Copy
-Edit
+
 background: linear-gradient(to right, red, yellow);
 This applies a gradient from red (left) to yellow (right).
 
@@ -31,8 +29,7 @@ A radial gradient radiates from a center point outward, creating a circular or e
 Example:
 
 css
-Copy
-Edit
+
 background: radial-gradient(circle, blue, white);
 This makes a gradient starting with blue at the center and fading into white.
 
@@ -42,11 +39,52 @@ Image masks allow parts of an image or element to be visible or hidden using a m
 Example:
 
 css
-Copy
-Edit
+
 .masked {
   -webkit-mask-image: url(mask.png);
   mask-image: url(mask.png);
 }
 This applies a mask.png shape to the element, showing only parts defined by the mask.
 
+
+
+
+
+
+
+// SECOND PART  
+1. Explain the history object with example.
+The history object is part of the browser's window object and allows navigation through the session history.
+
+Example:
+
+javascript
+
+history.back();   // Go to the previous page
+history.forward(); // Go to the next page
+2. Explain the navigator object with example.
+The navigator object contains information about the browser.
+
+Example:
+
+javascript
+
+console.log(navigator.userAgent); // Returns browser info
+console.log(navigator.language);  // Returns browser language
+3. Explain document object with example.
+The document object represents the webpage loaded in the browser and is part of the DOM (Document Object Model).
+
+Example:
+
+javascript
+
+document.getElementById("myDiv").style.color = "blue";
+4. Explain screen object with example.
+The screen object provides information about the user's screen.
+
+Example:
+
+javascript
+
+console.log(screen.width);  // Screen width
+console.log(screen.height); // Screen height
