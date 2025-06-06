@@ -1,0 +1,116 @@
+First Set of Questions
+1. What is HTML image and what are its attributes?
+HTML images are embedded using the <img> tag to display pictures on web pages. The main attributes include:
+
+src - specifies the image file path
+
+alt - provides alternate text for accessibility
+
+width/height - controls image dimensions
+
+border - adds a border around the image
+
+align - positions the image (left, right, center)
+
+2. Write the program for HTML images
+xml
+<!DOCTYPE html>
+<html>
+<body>
+    <img src="landscape.jpg" alt="Beautiful landscape" width="500" height="300">
+    <img src="https://example.com/photo.jpg" alt="Online image">
+</body>
+</html>
+3. Write the program how HTML image can be used as a link
+xml
+<a href="https://www.example.com">
+    <img src="photo.jpg" alt="Click me" width="200" height="150">
+</a>
+4. Explain about the color tag
+HTML colors can be set using several methods:
+
+Color names - like "red", "blue", "green"
+
+Hex codes - like "#FF0000" for red
+
+RGB values - like "rgb(255, 0, 0)" for red
+
+Colors can be applied to text, backgrounds, and borders
+
+5. Write the HTML program for colors
+xml
+<body bgcolor="lightblue" text="darkblue">
+    <p style="color: red;">This text is red</p>
+    <p style="color: #00FF00;">This text is green</p>
+    <p style="background-color: yellow;">Yellow background</p>
+</body>
+6. Explain marquee tag with example
+The <marquee> tag creates scrolling text or images (though it's deprecated in HTML5):
+
+xml
+<marquee direction="left" width="50%" height="100px">
+    This text scrolls from right to left
+</marquee>
+
+<marquee direction="up" behavior="alternate">
+    This text bounces up and down
+</marquee>
+Second Set of Questions
+1. What is HTML frame and what are its advantages?
+HTML frames divide a webpage into multiple sections, each displaying different HTML documents. Advantages include:
+
+Multiple documents in one window
+
+Independent scrolling for each section
+
+Easy navigation menus
+
+Content stays while other sections update
+
+2. Write the syntax for creating frames with example
+xml
+<frameset rows="20%, 80%">
+    <frame src="header.html" name="header">
+    <frame src="content.html" name="main">
+</frameset>
+3. Explain frameset tag with example
+xml
+<frameset cols="25%, 75%">
+    <frame src="menu.html" name="navigation">
+    <frameset rows="80%, 20%">
+        <frame src="main.html" name="content">
+        <frame src="footer.html" name="bottom">
+    </frameset>
+</frameset>
+4. What is iFrames?
+iFrames (inline frames) embed external content within a webpage. Unlike framesets, they can be placed anywhere on the page and are still supported in modern HTML.
+
+5. Explain iFrame attributes
+src - URL of the page to embed
+
+width/height - iframe dimensions
+
+frameborder - border visibility (0 or 1)
+
+scrolling - scrollbar control (yes, no, auto)
+
+name - identifier for targeting links
+
+6. Explain font size attribute with example
+xml
+<font size="1">Very small text</font>
+<font size="4">Normal text</font>
+<font size="7">Very large text</font>
+
+<!-- Modern CSS approach -->
+<p style="font-size: 12px;">Small text</p>
+<p style="font-size: 24px;">Large text</p>
+7. Explain font face attribute with example
+xml
+<font face="Arial">This text uses Arial font</font>
+<font face="Times New Roman">This uses Times New Roman</font>
+
+<!-- Modern CSS approach -->
+<p style="font-family: Verdana, sans-serif;">Verdana font</p>
+<p style="font-family: 'Courier New', monospace;">Courier font</p>
+Note: The <font> tag is deprecated in HTML5. Use CSS font-family and font-size properties instead for modern web development.

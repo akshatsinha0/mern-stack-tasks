@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curriculum Vitae</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Times New Roman", Times, serif;
+            background-image: url('coffeelaptopimage.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            color: white;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-info h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        .contact-info p {
+            margin-bottom: 8px;
+            line-height: 1.4;
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        .email-underline {
+            border-bottom: 2px solid white;
+            width: 100%;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .curriculum-title {
+            color: #ff4444;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-align: right;
+            margin-left: 20px;
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section h3 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-decoration: underline;
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        .section p, .section ul {
+            line-height: 1.6;
+            margin-bottom: 10px;
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        .section ul {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .section li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        .section li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+        }
+
+        .education-item {
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="contact-info">
+                <h2>Infomax Academy</h2>
+                <p><strong>Address:</strong> G.R. Complex Preetam Nagar, Dhoomanganj</p>
+                <p>Prayagraj, Uttar Pradesh - 211011</p>
+                <p><strong>Mobile:</strong> +91 8874588766</p>
+                <p><strong>Email:</strong> info@infomaxacademy.com</p>
+                <div class="email-underline"></div>
+            </div>
+            <div class="curriculum-title">
+                CURRICULUM VITAE
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Career Objective</h3>
+            <p>To perceive a career in a renowned firm with dedicated efforts and to associate myself with an organization that gives me a chance to update my knowledge.</p>
+        </div>
+
+        <div class="section">
+            <h3>Educational Qualification:</h3>
+            <div class="education-item">
+                <p>Graduation B.Com (Computer Science) Under Osmania University from Sandeepani Degree college, Kamareddy - 2009</p>
+            </div>
+            <div class="education-item">
+                <p>Intermediate C.E.C under Board of Intermediate Education, from Sandeepani Jr. College, Kamareddy – 2006</p>
+            </div>
+            <div class="education-item">
+                <p>S.S.C from Board of Secondary Education, Triveni High School, Domakonda – 2004</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Computer Skills:</h3>
+            <ul>
+                <li>P.G.D.C.A (Post Graduate Diploma in Computer Application)</li>
+                <li>A.D.C.A (Advanced Diploma in Computer Application)</li>
+                <li>D.T.P (Desktop Publisher)</li>
+                <li>Operation Systems (XP, 2000, 98, and Other)</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

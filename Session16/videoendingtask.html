@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Age Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .calculator-container {
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .title {
+            color: #f0f4a6;
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+            to { text-shadow: 2px 2px 20px rgba(240, 244, 166, 0.4); }
+        }
+
+        .input-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .date-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .date-input:focus {
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .calculate-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .calculate-btn:active {
+            transform: translateY(0);
+        }
+
+        .calculate-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .calculate-btn:hover::before {
+            left: 100%;
+        }
+
+        .results-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .result-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+            transition: all 0.5s ease;
+        }
+
+        .result-label {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .error-message {
+            background: rgba(244, 67, 54, 0.1);
+            border: 1px solid rgba(244, 67, 54, 0.3);
+            color: #d32f2f;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .error-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .loading .calculate-btn::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        @keyframes spin {
+            0% { transform: translateY(-50%) rotate(0deg); }
+            100% { transform: translateY(-50%) rotate(360deg); }
+        }
+
+        @keyframes countUp {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-count {
+            animation: countUp 0.6s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+                margin-bottom: 30px;
+            }
+
+            .input-container {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .date-input {
+                min-width: auto;
+                width: 100%;
+            }
+
+            .results-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .result-number {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <h1 class="title">AGE CALCULATOR</h1>
+        
+        <div class="input-container">
+            <input 
+                type="date" 
+                id="birthdate" 
+                class="date-input" 
+                aria-label="Select your birthdate"
+                max=""
+            >
+            <button 
+                id="calculateBtn" 
+                class="calculate-btn"
+                aria-label="Calculate age"
+            >
+                Calculator
+            </button>
+        </div>
+
+        <div class="results-container">
+            <div class="result-card">
+                <div class="result-number" id="years">00</div>
+                <div class="result-label">YEAR</div>
+            </div>
+            <div class="result-card">
+                <div class="result-number" id="months">00</div>
+                <div class="result-label">MONTH</div>
+            </div>
+            <div class="result-card">
+                <div class="result-number" id="days">00</div>
+                <div class="result-label">DAY</div>
+            </div>
+        </div>
+
+        <div class="error-message" id="errorMessage"></div>
+    </div>
+
+    <script>
+        'use strict';
+
+        /**
+         * Advanced Age Calculator System
+         * Implements enterprise-grade JavaScript patterns with precise date calculations
+         */
+        class AdvancedAgeCalculator {
+            // Private fields using # syntax
+            #elements;
+            #animationTimers;
+            #validationRules;
+            #dateCalculator;
+            #eventManager;
+
+            constructor() {
+                this.#initializeSystem();
+            }
+
+            #initializeSystem() {
+                this.#initializePrivateFields();
+                this.#initializeElements();
+                this.#setupDateConstraints();
+                this.#bindEventListeners();
+                this.#initializeManagers();
+                this.#setupAccessibility();
+            }
+
+            #initializePrivateFields() {
+                this.#animationTimers = new Set();
+                this.#validationRules = Object.freeze({
+                    minAge: new Date(1900, 0, 1),
+                    maxAge: new Date(),
+                    requiredFormat: 'YYYY-MM-DD'
+                });
+            }
+
+            #initializeElements() {
+                this.#elements = Object.freeze({
+                    birthdate: document.getElementById('birthdate'),
+                    calculateBtn: document.getElementById('calculateBtn'),
+                    years: document.getElementById('years'),
+                    months: document.getElementById('months'),
+                    days: document.getElementById('days'),
+                    errorMessage: document.getElementById('errorMessage'),
+                    container: document.querySelector('.calculator-container')
+                });
+            }
+
+            #setupDateConstraints() {
+                const today = new Date();
+                const maxDate = today.toISOString().split('T')[0];
+                this.#elements.birthdate.setAttribute('max', maxDate);
+                this.#elements.birthdate.setAttribute('min', '1900-01-01');
+            }
+
+            #bindEventListeners() {
+                this.#elements.calculateBtn.addEventListener('click', 
+                    this.#handleCalculation.bind(this));
+                
+                this.#elements.birthdate.addEventListener('change', 
+                    this.#handleDateChange.bind(this));
+                
+                this.#elements.birthdate.addEventListener('keypress', 
+                    this.#handleKeyPress.bind(this));
+
+                // Modern IntersectionObserver for performance
+                this.#setupIntersectionObserver();
+            }
+
+            #initializeManagers() {
+                this.#dateCalculator = new PreciseDateCalculator();
+                this.#eventManager = new EventManager();
+            }
+
+            #setupAccessibility() {
+                // ARIA live region for screen readers
+                const liveRegion = document.createElement('div');
+                liveRegion.setAttribute('aria-live', 'polite');
+                liveRegion.setAttribute('aria-atomic', 'true');
+                liveRegion.className = 'sr-only';
+                liveRegion.style.cssText = 'position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden;';
+                document.body.appendChild(liveRegion);
+                this.#elements.liveRegion = liveRegion;
+            }
+
+            #setupIntersectionObserver() {
+                if ('IntersectionObserver' in window) {
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('animate-count');
+                            }
+                        });
+                    }, { threshold: 0.1 });
+
+                    document.querySelectorAll('.result-card').forEach(card => {
+                        observer.observe(card);
+                    });
+                }
+            }
+
+            async #handleCalculation() {
+                try {
+                    this.#setLoadingState(true);
+                    this.#clearError();
+
+                    const birthdate = this.#elements.birthdate.value;
+                    
+                    if (!this.#validateInput(birthdate)) {
+                        return;
+                    }
+
+                    // Simulate processing time for UX
+                    await this.#sleep(500);
+
+                    const ageData = this.#dateCalculator.calculatePreciseAge(birthdate);
+                    
+                    await this.#animateResults(ageData);
+                    this.#announceResults(ageData);
+
+                } catch (error) {
+                    this.#handleError('Calculation failed. Please try again.');
+                    console.error('Age calculation error:', error);
+                } finally {
+                    this.#setLoadingState(false);
+                }
+            }
+
+            #validateInput(birthdate) {
+                if (!birthdate) {
+                    this.#showError('Please select your birthdate');
+                    this.#elements.birthdate.focus();
+                    return false;
+                }
+
+                const date = new Date(birthdate);
+                const today = new Date();
+
+                if (date > today) {
+                    this.#showError('Birthdate cannot be in the future');
+                    return false;
+                }
+
+                if (date < this.#validationRules.minAge) {
+                    this.#showError('Please enter a valid birthdate');
+                    return false;
+                }
+
+                return true;
+            }
+
+            async #animateResults(ageData) {
+                const elements = [
+                    { element: this.#elements.years, value: ageData.years },
+                    { element: this.#elements.months, value: ageData.months },
+                    { element: this.#elements.days, value: ageData.days }
+                ];
+
+                // Animate each element with staggered timing
+                for (let i = 0; i < elements.length; i++) {
+                    await this.#sleep(200);
+                    await this.#animateCountUp(elements[i].element, elements[i].value);
+                }
+            }
+
+            async #animateCountUp(element, targetValue) {
+                return new Promise((resolve) => {
+                    const duration = 1000;
+                    const startTime = performance.now();
+                    const startValue = 0;
+
+                    const animate = (currentTime) => {
+                        const elapsed = currentTime - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        
+                        // Easing function for smooth animation
+                        const easeOut = 1 - Math.pow(1 - progress, 3);
+                        const currentValue = Math.floor(startValue + (targetValue - startValue) * easeOut);
+                        
+                        element.textContent = String(currentValue).padStart(2, '0');
+                        element.classList.add('animate-count');
+
+                        if (progress < 1) {
+                            requestAnimationFrame(animate);
+                        } else {
+                            element.textContent = String(targetValue).padStart(2, '0');
+                            resolve();
+                        }
+                    };
+
+                    requestAnimationFrame(animate);
+                });
+            }
+
+            #handleDateChange() {
+                this.#clearError();
+                
+                if (this.#elements.birthdate.value) {
+                    this.#elements.calculateBtn.style.background = 
+                        'linear-gradient(135deg, #4CAF50 0%, #45a049 100%)';
+                } else {
+                    this.#elements.calculateBtn.style.background = 
+                        'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                }
+            }
+
+            #handleKeyPress(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    this.#handleCalculation();
+                }
+            }
+
+            #setLoadingState(isLoading) {
+                this.#elements.calculateBtn.disabled = isLoading;
+                this.#elements.container.classList.toggle('loading', isLoading);
+                
+                if (isLoading) {
+                    this.#elements.calculateBtn.textContent = 'Calculating...';
+                } else {
+                    this.#elements.calculateBtn.textContent = 'Calculator';
+                }
+            }
+
+            #showError(message) {
+                this.#elements.errorMessage.textContent = message;
+                this.#elements.errorMessage.classList.add('show');
+                
+                if (this.#elements.liveRegion) {
+                    this.#elements.liveRegion.textContent = `Error: ${message}`;
+                }
+            }
+
+            #clearError() {
+                this.#elements.errorMessage.classList.remove('show');
+            }
+
+            #handleError(message) {
+                this.#showError(message);
+                this.#elements.birthdate.focus();
+            }
+
+            #announceResults(ageData) {
+                if (this.#elements.liveRegion) {
+                    const message = `Age calculated: ${ageData.years} years, ${ageData.months} months, ${ageData.days} days`;
+                    this.#elements.liveRegion.textContent = message;
+                }
+            }
+
+            #sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+        }
+
+        /**
+         * Precise Date Calculator - Handles leap years and accurate calculations
+         */
+        class PreciseDateCalculator {
+            calculatePreciseAge(birthdateString) {
+                const birthdate = new Date(birthdateString);
+                const today = new Date();
+                
+                let years = today.getFullYear() - birthdate.getFullYear();
+                let months = today.getMonth() - birthdate.getMonth();
+                let days = today.getDate() - birthdate.getDate();
+
+                // Adjust for negative days
+                if (days < 0) {
+                    months--;
+                    const previousMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+                    days += previousMonth.getDate();
+                }
+
+                // Adjust for negative months
+                if (months < 0) {
+                    years--;
+                    months += 12;
+                }
+
+                // Final validation to ensure accuracy
+                const calculatedDate = new Date(
+                    birthdate.getFullYear() + years,
+                    birthdate.getMonth() + months,
+                    birthdate.getDate() + days
+                );
+
+                if (calculatedDate > today) {
+                    if (days > 0) {
+                        days--;
+                    } else {
+                        months--;
+                        if (months < 0) {
+                            years--;
+                            months = 11;
+                        }
+                        const daysInPrevMonth = new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+                        days = daysInPrevMonth - 1;
+                    }
+                }
+
+                return { years, months, days };
+            }
+
+            #isLeapYear(year) {
+                return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+            }
+
+            #getDaysInMonth(year, month) {
+                return new Date(year, month + 1, 0).getDate();
+            }
+        }
+
+        /**
+         * Event Manager - Handles complex event scenarios
+         */
+        class EventManager {
+            constructor() {
+                this.events = new Map();
+                this.setupGlobalHandlers();
+            }
+
+            setupGlobalHandlers() {
+                // Handle visibility changes for performance
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden) {
+                        this.pauseAnimations();
+                    } else {
+                        this.resumeAnimations();
+                    }
+                });
+
+                // Handle orientation changes
+                window.addEventListener('orientationchange', () => {
+                    setTimeout(() => this.handleLayoutChange(), 100);
+                });
+            }
+
+            pauseAnimations() {
+                document.querySelectorAll('.animate-count').forEach(el => {
+                    el.style.animationPlayState = 'paused';
+                });
+            }
+
+            resumeAnimations() {
+                document.querySelectorAll('.animate-count').forEach(el => {
+                    el.style.animationPlayState = 'running';
+                });
+            }
+
+            handleLayoutChange() {
+                // Trigger recalculation for responsive elements
+                window.dispatchEvent(new Event('resize'));
+            }
+        }
+
+        // Initialize the application with error handling
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                window.ageCalculator = new AdvancedAgeCalculator();
+                console.info('Advanced Age Calculator initialized successfully');
+            } catch (error) {
+                console.error('Failed to initialize Age Calculator:', error);
+                
+                // Fallback initialization
+                document.getElementById('calculateBtn').addEventListener('click', () => {
+                    alert('Calculator temporarily unavailable. Please refresh the page.');
+                });
+            }
+        });
+
+        // Progressive Web App features
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', async () => {
+                try {
+                    await navigator.serviceWorker.register('/sw.js');
+                    console.info('Service Worker registered for offline functionality');
+                } catch (error) {
+                    console.error('Service Worker registration failed:', error);
+                }
+            });
+        }
+
+        // Performance monitoring
+        if ('PerformanceObserver' in window) {
+            const observer = new PerformanceObserver((list) => {
+                list.getEntries().forEach((entry) => {
+                    if (entry.entryType === 'measure') {
+                        console.info(`Performance: ${entry.name} took ${entry.duration}ms`);
+                    }
+                });
+            });
+            observer.observe({ entryTypes: ['measure'] });
+        }
+    </script>
+</body>
+</html>
