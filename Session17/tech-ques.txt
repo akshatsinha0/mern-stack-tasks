@@ -1,0 +1,55 @@
+1. Mention some popular features of ES6.
+
+let and const for block-scoped variables
+
+Arrow functions (=>)
+
+Template literals
+
+Destructuring (object & array)
+
+Default parameters
+
+Classes and modules
+
+Promises
+
+Spread/rest operators (...)
+
+2. What is the difference between let and const?
+
+let: Allows reassignment, block-scoped
+
+const: Cannot be reassigned, also block-scoped
+
+Example:
+
+js code
+
+let x = 5; x = 10;  
+const y = 5; // y = 10 → ❌ Error
+3. Explain arrow functions with example.
+Arrow functions provide a shorter syntax and lexical this.
+
+Example:
+
+js code
+
+const add = (a, b) => a + b;
+4. Explain template strings with example.
+Template literals use backticks and ${} for embedding variables.
+
+Example:
+
+js code
+const name = "Akshat";  
+console.log(`Hello, ${name}!`);
+5. Explain object destructuring with example.
+Extract properties from objects into variables.
+
+Example:
+
+js code
+
+const user = { name: "Akshat", age: 22 };  
+const { name, age } = user;
