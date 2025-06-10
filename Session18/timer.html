@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Live Timer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    button {
+      margin-top: 15px;
+      margin-right: 10px;
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="timerDisplay"></div>
+
+  <button onclick="startTimer()">Click me</button>
+  <button onclick="stopTimer()">stop</button>
+
+  <script>
+    let timerId;
+
+    function updateTime() {
+      const now = new Date();
+      document.getElementById("timerDisplay").textContent = now.toString();
+    }
+
+    function startTimer() {
+      // If already running, do not start another
+      if (!timerId) {
+        updateTime(); // Show time immediately
+        timerId = setInterval(updateTime, 1000);
+      }
+    }
+
+    function stopTimer() {
+      clearInterval(timerId);
+      timerId = null;
+    }
+  </script>
+
+</body>
+</html>
