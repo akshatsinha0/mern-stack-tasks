@@ -1,8 +1,8 @@
 class WeatherApp {
     constructor() {
         this.apiUrl = 'https://api.open-meteo.com/v1/forecast';
-        this.geocodingUrl = 'https://api.open-meteo.com/v1/search';
-        this.currentLocation = { lat: 25.4358, lon: 81.8463 }; // Default: Allahabad
+        this.geocodingUrl = 'https://geocoding-api.open-meteo.com/v1/search'; // Corrected endpoint
+        this.currentLocation = { lat: 25.4358, lon: 81.8463 };
         this.currentCity = 'Allahabad';
         
         this.initializeApp();
@@ -12,8 +12,6 @@ class WeatherApp {
         this.bindEvents();
         this.updateDateTime();
         this.loadWeatherData();
-        
-        // Update time every minute
         setInterval(() => this.updateDateTime(), 60000);
     }
 
@@ -26,7 +24,6 @@ class WeatherApp {
             if (e.key === 'Enter') this.handleSearch();
         });
         
-        // Get user's current location
         this.getCurrentLocation();
     }
 
@@ -41,8 +38,8 @@ class WeatherApp {
                     this.loadWeatherData();
                 },
                 (error) => {
-                    console.log('Geolocation error:', error);
-                    // Use default location
+                    console.error('Geolocation error:', error);
+                    this.showError('Location access denied. Using default location.');
                 }
             );
         }
@@ -52,8 +49,11 @@ class WeatherApp {
         const locationInput = document.getElementById('locationInput');
         const query = locationInput.value.trim();
         
-        if (!query) return;
-        
+        if (!query) {
+            this.showError('Please enter a location name');
+            return;
+        }
+
         try {
             this.showLoading();
             const coordinates = await this.geocodeLocation(query);
@@ -68,34 +68,42 @@ class WeatherApp {
             }
         } catch (error) {
             console.error('Search error:', error);
-            this.showError('Error searching for location.');
+            this.showError(error.message || 'Error searching for location.');
         }
     }
 
     async geocodeLocation(query) {
         try {
-            const response = await fetch(`${this.geocodingUrl}?name=${encodeURIComponent(query)}&count=1&language=en&format=json`);
+            const params = new URLSearchParams({
+                name: query,
+                count: 1,
+                language: 'en',
+                format: 'json'
+            });
+
+            const response = await fetch(`${this.geocodingUrl}?${params}`);
             
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                throw new Error(`Geocoding failed: ${response.status} ${response.statusText}`);
             }
             
             const data = await response.json();
             
-            if (data.results && data.results.length > 0) {
-                const result = data.results[0];
-                return {
-                    lat: result.latitude,
-                    lon: result.longitude,
-                    name: result.name,
-                    country: result.country
-                };
+            if (!data.results || data.results.length === 0) {
+                throw new Error('Location not found');
             }
+
+            const result = data.results[0];
+            return {
+                lat: result.latitude,
+                lon: result.longitude,
+                name: result.name,
+                country: result.country
+            };
             
-            return null;
         } catch (error) {
             console.error('Geocoding error:', error);
-            throw error;
+            throw new Error(`Location search failed: ${error.message}`);
         }
     }
 
@@ -116,7 +124,7 @@ class WeatherApp {
             const response = await fetch(`${this.apiUrl}?${weatherParams}`);
             
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                throw new Error(`Weather API error: ${response.status} ${response.statusText}`);
             }
             
             const data = await response.json();
@@ -132,9 +140,7 @@ class WeatherApp {
     updateWeatherDisplay(data) {
         const current = data.current;
         const hourly = data.hourly;
-        const daily = data.daily;
         
-        // Update current weather
         document.getElementById('temperature').textContent = `${Math.round(current.temperature_2m)}°`;
         document.getElementById('cityName').textContent = this.currentCity;
         document.getElementById('humidity').textContent = `${current.relative_humidity_2m}%`;
@@ -142,9 +148,8 @@ class WeatherApp {
         document.getElementById('feelsLike').textContent = `${Math.round(current.apparent_temperature)}°`;
         document.getElementById('pressure').textContent = `${Math.round(current.pressure_msl)} hPa`;
         document.getElementById('visibility').textContent = `${Math.round(15 - current.cloud_cover / 10)} km`;
-        document.getElementById('uvIndex').textContent = daily.uv_index_max[0] || '3';
-        
-        // Update weather icon and description
+        document.getElementById('uvIndex').textContent = data.daily.uv_index_max[0] || '3';
+
         const weatherCode = current.weather_code;
         const isDay = current.is_day;
         const { icon, description } = this.getWeatherIcon(weatherCode, isDay);
@@ -152,7 +157,6 @@ class WeatherApp {
         document.getElementById('weatherIcon').className = icon;
         document.getElementById('weatherDescription').textContent = description;
         
-        // Update hourly forecast
         this.updateHourlyForecast(hourly);
     }
 
@@ -160,7 +164,6 @@ class WeatherApp {
         const container = document.querySelector('.hourly-container');
         container.innerHTML = '';
         
-        // Show next 12 hours
         for (let i = 1; i <= 12; i++) {
             const time = new Date(hourly.time[i]);
             const temp = Math.round(hourly.temperature_2m[i]);
@@ -219,8 +222,7 @@ class WeatherApp {
             hour12: false
         };
         
-        const timeString = now.toLocaleString('en-US', options);
-        document.getElementById('currentTime').textContent = timeString;
+        document.getElementById('currentTime').textContent = now.toLocaleString('en-US', options);
     }
 
     showLoading() {
@@ -243,96 +245,10 @@ class WeatherApp {
     }
 }
 
-// Enhanced error handling and performance optimization
-class ErrorHandler {
-    static handle(error, context = '') {
-        console.error(`Error in ${context}:`, error);
-        
-        // Send error to analytics service (if implemented)
-        if (window.gtag) {
-            window.gtag('event', 'exception', {
-                description: `${context}: ${error.message}`,
-                fatal: false
-            });
-        }
-    }
-}
-
-// Performance monitoring
-class PerformanceMonitor {
-    static startTiming(label) {
-        performance.mark(`${label}-start`);
-    }
-    
-    static endTiming(label) {
-        performance.mark(`${label}-end`);
-        performance.measure(label, `${label}-start`, `${label}-end`);
-        
-        const measure = performance.getEntriesByName(label)[0];
-        console.log(`${label} took ${measure.duration.toFixed(2)}ms`);
-    }
-}
-
-// Initialize the weather app when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    PerformanceMonitor.startTiming('app-initialization');
-    
     try {
-        const app = new WeatherApp();
-        PerformanceMonitor.endTiming('app-initialization');
+        new WeatherApp();
     } catch (error) {
-        ErrorHandler.handle(error, 'App Initialization');
-    }
-});
-
-// Service Worker registration for offline support
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-            .then(registration => {
-                console.log('SW registered: ', registration);
-            })
-            .catch(registrationError => {
-                console.log('SW registration failed: ', registrationError);
-            });
-    });
-}
-
-// Add touch gestures for mobile devices
-class TouchGestureHandler {
-    constructor() {
-        this.startY = 0;
-        this.startX = 0;
-        this.init();
-    }
-    
-    init() {
-        const weatherCard = document.querySelector('.weather-card');
-        
-        weatherCard.addEventListener('touchstart', (e) => {
-            this.startY = e.touches[0].clientY;
-            this.startX = e.touches[0].clientX;
-        });
-        
-        weatherCard.addEventListener('touchend', (e) => {
-            const endY = e.changedTouches[0].clientY;
-            const endX = e.changedTouches[0].clientX;
-            
-            const diffY = this.startY - endY;
-            const diffX = this.startX - endX;
-            
-            // Swipe down to refresh
-            if (diffY < -100 && Math.abs(diffX) < 50) {
-                const app = new WeatherApp();
-                app.loadWeatherData();
-            }
-        });
-    }
-}
-
-// Initialize touch gestures
-document.addEventListener('DOMContentLoaded', () => {
-    if ('ontouchstart' in window) {
-        new TouchGestureHandler();
+        console.error('App initialization error:', error);
     }
 });
