@@ -1,0 +1,46 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #eef7fb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+}
+
+h1 {
+  font-size: 3em;
+  color: #5a7174;
+}
+
+#timer {
+  font-size: 2.5em;
+  margin: 20px 0;
+}
+
+.buttons button {
+  padding: 10px 20px;
+  font-size: 1em;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#start {
+  background-color: #83adae;
+  color: white;
+}
+
+#stop {
+  background-color: red;
+  color: white;
+}
+
+#reset {
+  background-color: #a9dfbf;
+  color: black;
+}
