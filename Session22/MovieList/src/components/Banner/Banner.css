@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&display=swap');
+
+.banner {
+  position: relative;
+  font-family: 'Baloo 2', sans-serif;
+  height: 80vh;
+  overflow: hidden;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.banner-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.1);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.banner-slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.banner-content {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+}
+
+.banner-title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #fff, #4ecdc4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.banner-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #e0e0e0;
+}
+
+.discover-btn {
+  background: #ffffff;
+  color: #4ecdc4;
+  border: 2px solid #4ecdc4;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.discover-btn:hover {
+  background: #f2f2f2;
+}
+
+.banner-controls {
+  position: absolute;
+  top: 50%; width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  padding: 0 2rem;
+}
+
+.banner-nav {
+  background: rgba(255,255,255,0.2);
+  border: 2px solid rgba(78,205,196,0.5);
+  color: #fff;
+  width: 50px; height: 50px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.banner-nav:hover {
+  background: rgba(78,205,196,0.3);
+  transform: scale(1.1);
+}
+
+.banner-indicators {
+  position: absolute;
+  bottom: 2rem; left: 50%;
+  transform: translateX(-50%);
+  display: flex; gap: 1rem;
+}
+
+.indicator {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.indicator.active {
+  background: #4ecdc4;
+  transform: scale(1.3);
+}
+
+@media (max-width: 768px) {
+  .banner { height: 60vh; }
+  .banner-title { font-size: 2rem; }
+  .banner-subtitle { font-size: 1rem; }
+  .discover-btn { padding: 0.8rem 1.5rem; font-size: 1rem; }
+}
