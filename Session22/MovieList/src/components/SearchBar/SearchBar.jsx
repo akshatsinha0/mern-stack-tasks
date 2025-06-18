@@ -1,3 +1,5 @@
+// File: src/components/SearchBar/SearchBar.jsx
+
 import { useState, useRef, useEffect } from 'react';
 import './SearchBar.css';
 
@@ -9,31 +11,18 @@ const SearchBar = ({ onSearch, isLoading }) => {
 
   useEffect(() => {
     return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, []);
 
-  const handleSearch = (e) => {
+  const handleSearch = e => {
     const value = e.target.value;
     setSearchTerm(value);
-    
-    if (value.trim()) {
-      setShowLoading(true);
-    } else {
-      setShowLoading(false);
-    }
-
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-
+    setShowLoading(!!value.trim());
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
       onSearch(value);
-      if (value.trim()) {
-        setTimeout(() => setShowLoading(false), 1000);
-      }
+      if (value.trim()) setTimeout(() => setShowLoading(false), 1000);
     }, 500);
   };
 
@@ -43,24 +32,15 @@ const SearchBar = ({ onSearch, isLoading }) => {
       recognition.continuous = false;
       recognition.interimResults = false;
       recognition.lang = 'en-US';
-
       setIsListening(true);
-
-      recognition.onresult = (event) => {
+      recognition.onresult = event => {
         const transcript = event.results[0][0].transcript;
         setSearchTerm(transcript);
         onSearch(transcript);
         setIsListening(false);
       };
-
-      recognition.onerror = () => {
-        setIsListening(false);
-      };
-
-      recognition.onend = () => {
-        setIsListening(false);
-      };
-
+      recognition.onerror = () => setIsListening(false);
+      recognition.onend = () => setIsListening(false);
       recognition.start();
     } else {
       alert('Voice search is not supported in your browser');
@@ -69,34 +49,36 @@ const SearchBar = ({ onSearch, isLoading }) => {
 
   return (
     <div className="search-container">
-      <div className="search-bar">
-        <div className="search-input-wrapper">
-          <input
-            type="text"
-            placeholder="Search here"
-            value={searchTerm}
-            onChange={handleSearch}
-            className="search-input"
-          />
-          <button 
-            className={`voice-search-btn ${isListening ? 'listening' : ''}`}
-            onClick={handleVoiceSearch}
-            title="Voice Search"
-          >
-            <span className="voice-icon">🎤</span>
-          </button>
-        </div>
-        {(showLoading || isLoading) && searchTerm.trim() && (
-          <div className="loading-indicator">
-            <div className="loading-dots">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <span className="loading-text">Loading...</span>
-          </div>
-        )}
+      <div className="search-input-wrapper">
+        <img
+          src="/search.svg"
+          alt="Search"
+          className="search-icon"
+        />
+        <input
+          type="text"
+          placeholder="Search here."
+          value={searchTerm}
+          onChange={handleSearch}
+          className="search-input"
+        />
+        <button
+          className={`voice-search-btn ${isListening ? 'listening' : ''}`}
+          onClick={handleVoiceSearch}
+          title="Voice Search"
+        >
+          🎤
+        </button>
       </div>
+
+      {(showLoading || isLoading) && searchTerm.trim() && (
+        <div className="loading-indicator">
+          <div className="loading-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <span className="loading-text">Loading...</span>
+        </div>
+      )}
     </div>
   );
 };

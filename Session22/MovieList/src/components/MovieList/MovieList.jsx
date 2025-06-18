@@ -1,95 +1,111 @@
 // File: src/components/MovieList/MovieList.jsx
 
-import React, { useState, useEffect } from 'react';        // React hooks for state and lifecycle[1]
+import React, { useEffect } from 'react';
 import MovieCard from './MovieCard';
 import SearchBar from '../SearchBar/SearchBar';
 import { useMovies } from '../../hooks/useMovies';
 import './MovieList.css';
 
-const MovieList = () => {
-  const [activeCategory, setActiveCategory] = useState('marvel');
-  const [currentPage, setCurrentPage] = useState(1);
+export default function MovieList() {
   const moviesPerPage = 8;
-  const { movies, loading, error, setQuery } = useMovies('marvel', 'movie');
+  const {
+    movies,
+    totalResults,
+    loading,
+    error,
+    page,
+    setQuery,
+    setPage,
+  } = useMovies('marvel', 'movie');
 
   const categories = [
     { id: 'marvel', label: 'Marvel Movie', query: 'marvel' },
-    { id: 'funny', label: 'Funny Movie', query: 'comedy' },
+    { id: 'funny',   label: 'Funny Movie',  query: 'comedy' },
     { id: 'animation', label: 'Animation Movie', query: 'animation' },
-    { id: 'series', label: 'Web Series Movie', query: 'series' }
+    { id: 'series',  label: 'Web Series Movie', query: 'series' },
   ];
 
-  // Whenever category changes, reset query and page[1]
+  // Reset to first page whenever query changes
   useEffect(() => {
-    const cat = categories.find(c => c.id === activeCategory);
-    if (cat) {
-      setQuery(cat.query);
-      setCurrentPage(1);
-    }
-  }, [activeCategory, setQuery]);
+    setPage(1);
+  }, [setQuery, setPage]);
 
-  const handleCategoryChange = id => setActiveCategory(id);
-  const handleSearch = term => {
-    if (term.trim()) {
-      setQuery(term);
-      setActiveCategory('');
-    } else {
-      setActiveCategory('marvel');
-    }
-    setCurrentPage(1);
+  const handleCategoryChange = (id, query) => {
+    setQuery(query);
   };
 
-  // Compute current page slice[2]
-  const startIndex = (currentPage - 1) * moviesPerPage;
-  const displayedMovies = movies.slice(startIndex, startIndex + moviesPerPage);
+  const handleSearch = term => {
+    setQuery(term.trim() ? term : 'marvel');
+  };
 
-  const handlePageClick = page => setCurrentPage(page);
+  const maxPages = Math.min(
+    5,
+    Math.ceil(totalResults / moviesPerPage)
+  );
+
+  const startIndex = (page - 1) * moviesPerPage;
+  const displayedMovies = movies.slice(
+    startIndex,
+    startIndex + moviesPerPage
+  );
 
   return (
     <section id="movie-list" className="movie-list-section">
       <div className="movie-list-header">
-        <img src="/MovieListText.png" alt="Movie List" className="movie-list-title-img" />
+        <img
+          src="/MovieListText.png"
+          alt="Movie List"
+          className="movie-list-title-img"
+        />
+
         <div className="movie-categories">
           {categories.map(cat => (
             <button
               key={cat.id}
-              className={`category-btn ${activeCategory === cat.id ? 'active' : ''}`}
-              onClick={() => handleCategoryChange(cat.id)}
+              className={`category-btn${cat.query === undefined ? '' : ''}`}
+              onClick={() => handleCategoryChange(cat.id, cat.query)}
             >
               {cat.label}
             </button>
           ))}
         </div>
+
         <SearchBar onSearch={handleSearch} isLoading={loading} />
       </div>
 
       <div className="movies-content">
-        {loading && <p className="loading-text">Loading movies...</p>}
-        {error && <p className="error-text">{error}</p>}
+        {loading && <p className="loading-text">Loading movies…</p>}
+        {error   && <p className="error-text">Error: {error}</p>}
+
         {!loading && !error && (
           <>
             <div className="movie-grid">
               {displayedMovies.map((movie, idx) => (
-                <MovieCard key={movie.imdbID + idx} movie={movie} delay={idx * 0.1} />
+                <MovieCard
+                  key={`${movie.imdbID}-${idx}`}
+                  movie={movie}
+                  delay={idx * 0.1}
+                />
               ))}
             </div>
 
             <div className="pagination-info">
-              {[1, 2, 3, 4, 5].map(page => (
+              {[1, 2, 3, 4, 5].map(num => (
                 <button
-                  key={page}
-                  className={`page-dot ${page === currentPage ? 'active' : ''}`}
-                  onClick={() => handlePageClick(page)}
+                  key={num}
+                  className={`page-dot${num === page ? ' active' : ''}`}
+                  onClick={() => setPage(num)}
+                  disabled={num > maxPages}
                 >
-                  {page}
+                  {num}
                 </button>
               ))}
             </div>
 
             <button
               className="show-more-btn"
-              onClick={() => setCurrentPage(prev => Math.min(prev + 1, 5))}
-              disabled={currentPage >= 5}
+              onClick={() => setPage(prev => Math.min(prev + 1, 5))}
+              disabled={page >= maxPages}
             >
               Show more..
               <span className="btn-ripple" />
@@ -98,7 +114,5 @@ const MovieList = () => {
         )}
       </div>
     </section>
-  );
-};
-
-export default MovieList;
+);
+}
