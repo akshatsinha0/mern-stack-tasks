@@ -1,0 +1,42 @@
+CRUD operations in MongoDB (with brief examples):
+ 1. Create
+   - insertOne / insertMany
+     db.users.insertOne({ name: 'Alice', age: 30, city: 'Mumbai' });
+     db.users.insertMany([{ name: 'Bob', age: 25 }, { name: 'Carol', age: 28 }]);
+ 2. Read
+   - findOne / find
+     const u = db.users.findOne({ name: 'Alice' });
+     const cursor = db.users.find({ age: { $gt: 20 } });
+     cursor.forEach(doc => printjson(doc));
+ 3. Update
+   - updateOne / updateMany (with optional upsert)
+     db.users.updateOne({ name: 'Alice' }, { $set: { city: 'Delhi' } });
+     db.users.updateMany({ age: { $lt: 25 } }, { $inc: { age: 1 } });
+ 4. Delete
+   - deleteOne / deleteMany
+     db.users.deleteOne({ name: 'Bob' });
+     db.users.deleteMany({ age: { $gte: 60 } });
+ What is Upsert?
+ Upsert = update + insert.
+ Using { upsert: true }: if a document matches filter, it updates; otherwise, inserts a new document.
+ Example:
+ db.users.updateOne({ email: 'alice@example.com' },
+                    { $set: { name: 'Alice', city: 'Mumbai' } },
+                    { upsert: true });
+ Comparison operators in MongoDB:- $eq, $ne, $gt, $gte, $lt, $lte, $in, $nin
+ Example:
+ db.users.find({ age: { $gte: 18, $lt: 30 }, status: { $in: ['A', 'B'] } });
+ Logical operators in MongoDB:- $and, $or, $not, $nor
+ Examples:
+ db.users.find({
+  $and: [
+    { $or: [{ city: 'Delhi' }, { city: 'Mumbai' }] },
+    { age: { $gt: 25 } }
+  ]
+ });
+ db.users.find({
+  $nor: [
+    { status: 'inactive' },
+    { age: { $lt: 18 } }
+  ]
+});
