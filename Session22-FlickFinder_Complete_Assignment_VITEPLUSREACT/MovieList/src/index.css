@@ -1,14 +1,13 @@
-/* Baloo 2 variable styles (400–800) */
 .baloo-2-regular { font-family: "Baloo 2", sans-serif; font-weight: 400; font-optical-sizing: auto; }
 .baloo-2-semibold { font-family: "Baloo 2", sans-serif; font-weight: 600; font-optical-sizing: auto; }
 .baloo-2-bold     { font-family: "Baloo 2", sans-serif; font-weight: 800; font-optical-sizing: auto; }
 
-/* Poppins weights */
+
 .poppins-regular           { font-family: "Poppins", sans-serif; font-weight: 400; }
 .poppins-medium            { font-family: "Poppins", sans-serif; font-weight: 500; }
 .poppins-semibold          { font-family: "Poppins", sans-serif; font-weight: 600; }
 .poppins-bold              { font-family: "Poppins", sans-serif; font-weight: 700; }
 .poppins-regular-italic    { font-family: "Poppins", sans-serif; font-weight: 400; font-style: italic; }
 
-/* Times New Roman (system serif fallback) */
+
 .times-new-roman { font-family: "Times New Roman", Times, serif; font-weight: 400; }

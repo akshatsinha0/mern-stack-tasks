@@ -1,5 +1,3 @@
-// File: src/components/MovieList/MovieList.jsx
-
 import React, { useEffect } from 'react';
 import MovieCard from './MovieCard';
 import SearchBar from '../SearchBar/SearchBar';
@@ -25,7 +23,7 @@ export default function MovieList() {
     { id: 'series',  label: 'Web Series Movie', query: 'series' },
   ];
 
-  // Reset to first page whenever query changes
+  
   useEffect(() => {
     setPage(1);
   }, [setQuery, setPage]);
