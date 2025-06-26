@@ -1,0 +1,31 @@
+1. MongoDB Data Model
+- Document-Oriented: Data is stored in BSON documents (binary JSON), organized into collections rather th- Schema Flexibility: Documents in the same collection can have different fields and structures.
+- Embedded Documents & Arrays: Supports rich, nested data structures within a single document.
+- References: Use DBRefs or manual references to link documents across collections when needed.
+- Use Cases: Ideal for hierarchical or complex data where embedding reduces the need for joins.
+2. Basic Operations in Mongo Shell
+- show dbs: List all databases.
+- use <db>: Switch to or create a database.
+- show collections: List collections in the current database.
+- db.<collection>.insertOne()/insertMany(): Insert documents.
+- db.<collection>.find()/findOne(): Query documents.
+- db.<collection>.updateOne()/updateMany(): Update documents.
+- db.<collection>.deleteOne()/deleteMany(): Delete documents.
+- db.<collection>.aggregate(): Perform aggregation pipeline operations.
+3. JSON vs BSON
+JSON (JavaScript Object Notation): text-based, human-readable; limited data types.
+BSON (Binary JSON): binary-encoded, extends JSON with additional types (Date, ObjectId, binary, 64-bit in4. MongoDB Data Types
+- String: UTF-8 string.
+- Int32 / Int64: 32-bit and 64-bit integers.
+- Double: 64-bit floating point.
+- Boolean: true/false.
+- Date: Millisecond-precision datetime.
+- ObjectId: 12-byte unique identifier.
+- Array: Ordered list of values.
+- Embedded Document: Nested document.
+- Binary Data: Binary blob with subtype.
+- Decimal128: High-precision decimal.
+- Null: Null value.
+- Regular Expression: Pattern query.
+- Timestamp: Internal BSON timestamp.
+- MinKey / MaxKey: Lower/upper bounds in comparisons.
