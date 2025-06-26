@@ -70,6 +70,7 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({
         step="0.01"
         value={volume}
         onChange={e => onVolumeChange(parseFloat(e.target.value))}
+        aria-label="Volume control"
       />
     </div>
   </div>

@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { Track, PlayerState } from '../types/music';
+import type { Track, PlayerState } from '../types/music';
 
 export const useAudioPlayer = (tracks: Track[]) => {
   const audioRef = useRef<HTMLAudioElement>(null);

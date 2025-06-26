@@ -1,5 +1,5 @@
 import React from 'react';
-import { Track } from '../types/music';
+import type { Track } from '../types/music';
 
 interface TrackInfoProps {
   track: Track;
