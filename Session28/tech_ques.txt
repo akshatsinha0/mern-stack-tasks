@@ -1,0 +1,27 @@
+Node.js Technical Questions & Answers
+1. What is Node.js?
+Node.js is an open-source, cross-platform JavaScript runtime built on Chrome’s V8
+engine. It executes JavaScript code server-side, enabling developers to build
+scalable, real-time network applications.
+2. What are the advantages of Node.js?
+• Non-blocking I/O: Asynchronous operations prevent the execution thread from
+being blocked.
+• Unified Language: JavaScript on both client and server simplifies development.
+• Rich Ecosystem: npm offers thousands of reusable packages.
+• Scalability: Suitable for microservices architectures and real-time apps.
+3. Explain the features of Node.js.
+• Asynchronous & Event-Driven: All I/O APIs are non-blocking.
+• Single-Threaded Event Loop: Manages multiple connections without threading
+overhead.
+• Fast Execution: Powered by Google’s V8 engine.
+• Cross-Platform: Runs on Windows, macOS, Linux.
+• Built-in Modules: Includes HTTP, File System, Streams, and more.
+4. Explain the Traditional Web Server Model.
+In traditional servers, each client request spawns a new thread or process. This
+model can lead to high memory usage and significant context-switching overhead
+under heavy loads.
+5. Explain the Node.js Process Model.
+Node.js uses a single-threaded event loop. Requests are queued and handled by
+the event loop sequentially. Long-running tasks are delegated to a thread pool,
+allowing the main thread to remain responsive and efficiently handle concurrent
+connections.
